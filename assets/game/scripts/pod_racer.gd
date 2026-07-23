@@ -6,7 +6,7 @@ class_name PodRacer
 
 @export_category("Stats")
 @export var turn_force:float = 16.0
-@export var tilt_force:float = 9.0
+@export var tilt_force:float = 16.0
 @export var max_velocity:float = 40.0
 
 @export_category("Debug")

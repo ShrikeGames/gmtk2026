@@ -102,5 +102,5 @@ Negative
 - [TODO] Create scenes for picking racer and track
 - [TODO] Start on CPU racer AI
 - [TODO] Create 3d bust for character and get it in the game for showing reactions to speed etc
-
+- [TODO] MAKE IT SO I STOP FLIPPING UPSIDE DOWN
 
