@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c5f82vj37hqsy"]
+
+[ext_resource type="PackedScene" uid="uid://dsrn2hdglo6wp" path="res://assets/game/models/not_rigged/road_straight_1.blend" id="1_8nojd"]
+[ext_resource type="Texture2D" uid="uid://bu24s6mtg5x3q" path="res://assets/game/models/not_rigged/textures/road_1.png" id="2_lcixc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm87v"]
+albedo_texture = ExtResource("2_lcixc")
+
+[node name="road_straight_1" unique_id=1588399048 instance=ExtResource("1_8nojd")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="road-straight-1" parent="." index="0" unique_id=2026928801]
+material_override = SubResource("StandardMaterial3D_rm87v")
+
+[node name="StaticBody3D" parent="road-straight-1" index="0" unique_id=949143301]
+collision_layer = 3
+collision_mask = 3

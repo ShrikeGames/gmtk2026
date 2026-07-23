@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bg5ltcnyfa3yd"]
+
+[ext_resource type="Theme" uid="uid://cvbr13mu1wmpr" path="res://assets/system/menu/assets/themes/menu_theme.tres" id="1_170jk"]
+[ext_resource type="Script" uid="uid://br6pnx7vybq6b" path="res://assets/system/menu/scripts/menu_toggle_button.gd" id="2_170jk"]
+[ext_resource type="AudioStream" uid="uid://b2r7rh54fmnq6" path="res://assets/system/menu/assets/ui/sfx/ui_button_sounds.tres" id="3_b5mu0"]
+
+[node name="MenuToggleButton" type="Button" unique_id=1991195594 node_paths=PackedStringArray("audio_stream_player")]
+custom_minimum_size = Vector2(500, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -28.0
+offset_right = 100.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 30)
+theme = ExtResource("1_170jk")
+text = "DISPLAY: "
+flat = true
+script = ExtResource("2_170jk")
+audio_stream_player = NodePath("ButtonAudioPlayer")
+
+[node name="ButtonAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=865233846]
+stream = ExtResource("3_b5mu0")
+bus = &"UI"
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://jn40xx7wqphq"]
+
+[ext_resource type="PackedScene" uid="uid://bi7bq71a8s15f" path="res://assets/game/models/not_rigged/track_1.blend" id="1_wwtau"]
+[ext_resource type="Texture2D" uid="uid://bu24s6mtg5x3q" path="res://assets/game/models/not_rigged/textures/road_1.png" id="2_axm71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlb6v"]
+albedo_texture = ExtResource("2_axm71")
+
+[node name="track_1" unique_id=894771361 instance=ExtResource("1_wwtau")]
+
+[node name="track_1" parent="." index="0" unique_id=154815807]
+material_override = SubResource("StandardMaterial3D_xlb6v")
+
+[node name="StaticBody3D" parent="track_1" index="0" unique_id=2113443257]
+collision_layer = 3
+collision_mask = 3

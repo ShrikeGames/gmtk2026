@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://i1o7ewiwim8t"]
+
+[ext_resource type="Theme" uid="uid://cvbr13mu1wmpr" path="res://assets/system/menu/assets/themes/menu_theme.tres" id="1_c0ymv"]
+[ext_resource type="Script" uid="uid://db08qrkxgo1wp" path="res://assets/system/menu/scripts/main_menu.gd" id="1_dgxna"]
+[ext_resource type="PackedScene" uid="uid://m34pi88kuk80" path="res://assets/system/menu/scenes/menu_button.tscn" id="2_2lj3x"]
+[ext_resource type="Texture2D" uid="uid://bgyx6ijgjr5ry" path="res://assets/system/menu/assets/ui/placeholders/menu_logo.png" id="2_swo2c"]
+[ext_resource type="PackedScene" uid="uid://bsss805hi0wes" path="res://assets/system/menu/scenes/menu_title.tscn" id="3_5x4hn"]
+[ext_resource type="PackedScene" uid="uid://bg5ltcnyfa3yd" path="res://assets/system/menu/scenes/menu_toggle_button.tscn" id="5_7eey7"]
+[ext_resource type="PackedScene" uid="uid://fo3mc7n2vn6" path="res://assets/system/menu/scenes/menu_volume_slider.tscn" id="7_vha02"]
+
+[node name="MainMenu" type="Node2D" unique_id=122280145 node_paths=PackedStringArray("main_menu_container", "continue_menu_button", "start_menu_button", "options_menu_button", "credits_button", "exit_menu_button", "options_menu_container", "game_options_menu_button", "audio_options_menu_button", "video_options_menu_button", "back_options_menu_button", "game_options_menu_container", "back_game_options_menu_button", "audio_options_menu_container", "back_audio_options_menu_button", "video_options_menu_container", "video_options_fullscreen_toggle_menu_button", "back_video_options_menu_button", "credits_menu_container", "back_credits_menu_button")]
+script = ExtResource("1_dgxna")
+main_menu_container = NodePath("CenterMenusContainer/CenterMainMenuContainer")
+continue_menu_button = NodePath("CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/ContinueMenuButton")
+start_menu_button = NodePath("CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/StartMenuButton")
+options_menu_button = NodePath("CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/OptionsMenuButton")
+credits_button = NodePath("CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/CreditsMenuButton")
+exit_menu_button = NodePath("CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/ExitMenuButton")
+options_menu_container = NodePath("CenterMenusContainer/CenterOptionsMenuContainer")
+game_options_menu_button = NodePath("CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer/GameOptionsMenuButton")
+audio_options_menu_button = NodePath("CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer/AudioOptionsMenuButton")
+video_options_menu_button = NodePath("CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer/VideoOptionsMenuButton")
+back_options_menu_button = NodePath("CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer/BackMenuButton")
+game_options_menu_container = NodePath("CenterMenusContainer/CenterGameOptionsMenuContainer")
+back_game_options_menu_button = NodePath("CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer/BackMenuButton")
+audio_options_menu_container = NodePath("CenterMenusContainer/CenterAudioOptionsMenuContainer")
+back_audio_options_menu_button = NodePath("CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer/BackMenuButton")
+video_options_menu_container = NodePath("CenterMenusContainer/CenterVideoOptionsMenuContainer")
+video_options_fullscreen_toggle_menu_button = NodePath("CenterMenusContainer/CenterVideoOptionsMenuContainer/VBoxContainer/FullscreenToggleButton")
+back_video_options_menu_button = NodePath("CenterMenusContainer/CenterVideoOptionsMenuContainer/VBoxContainer/BackMenuButton")
+credits_menu_container = NodePath("CenterMenusContainer/CenterCreditsOptionsMenuContainer")
+back_credits_menu_button = NodePath("CenterMenusContainer/CenterCreditsOptionsMenuContainer/VBoxContainer/BackMenuButton")
+
+[node name="CenterLogoHeaderContainer" type="CenterContainer" parent="." unique_id=1883549974]
+offset_right = 1920.0
+offset_bottom = 400.0
+
+[node name="MenuLogo" type="Sprite2D" parent="CenterLogoHeaderContainer" unique_id=1024340101]
+position = Vector2(960, 200)
+texture = ExtResource("2_swo2c")
+
+[node name="CenterMenusContainer" type="CenterContainer" parent="." unique_id=323618516]
+offset_top = 400.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="CenterMainMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=986869317]
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterMainMenuContainer" unique_id=41769692]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="MenuTitle" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=940388308 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+text = "[center]Menu[/center]"
+
+[node name="ContinueMenuButton" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=1991195594 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "CONTINUE GAME"
+
+[node name="StartMenuButton" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=131115008 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "START NEW GAME"
+
+[node name="OptionsMenuButton" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=2091668030 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="CreditsMenuButton" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=877240880 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="ExitMenuButton" parent="CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=156049495 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "QUIT GAME"
+
+[node name="CenterOptionsMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=612136440]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterOptionsMenuContainer" unique_id=181029096]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="OptionsTitle" parent="CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer" unique_id=214384340 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+
+[node name="GameOptionsMenuButton" parent="CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer" unique_id=127369442 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "GAME"
+
+[node name="AudioOptionsMenuButton" parent="CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer" unique_id=902411971 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "AUDIO"
+
+[node name="VideoOptionsMenuButton" parent="CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer" unique_id=1690013550 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "VIDEO"
+
+[node name="BackMenuButton" parent="CenterMenusContainer/CenterOptionsMenuContainer/VBoxContainer" unique_id=300019464 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "RETURN TO MAIN MENU"
+
+[node name="CenterGameOptionsMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=1239833185]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterGameOptionsMenuContainer" unique_id=1728103708]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="GameTitle" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=1802188518 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+text = "[center]Game Options[/center]"
+
+[node name="DifficultyToggleButton" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=1015740416 instance=ExtResource("5_7eey7")]
+layout_mode = 2
+text = "DIFFICULTY:"
+value_options = Array[String](["EASY", "NORMAL", "HARD"])
+value_id = 1
+settings_name = "difficulty"
+
+[node name="TutorialToggleButton" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=223336301 instance=ExtResource("5_7eey7")]
+layout_mode = 2
+text = "TUTORIAL:"
+value_options = Array[String](["DISABLED", "ENABLED"])
+value_id = 1
+settings_name = "tutorial"
+
+[node name="BackMenuButton" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=842669994 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "RETURN TO OPTIONS MENU"
+
+[node name="CenterAudioOptionsMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=846122017]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer" unique_id=41709082]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="AudioTitle" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=84789124 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+text = "[center]Audio Options[/center]"
+
+[node name="MasterVolumeSlider" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=1116323549 instance=ExtResource("7_vha02")]
+layout_mode = 2
+
+[node name="UIVolumeSlider" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=1862116381 instance=ExtResource("7_vha02")]
+layout_mode = 2
+text = "   UI Volume: "
+audio_bus_name = "UI"
+
+[node name="MusicVolumeSlider" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=732780702 instance=ExtResource("7_vha02")]
+layout_mode = 2
+text = "   Music Volume: "
+audio_bus_name = "Music"
+
+[node name="SFXVolumeSlider" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=786074102 instance=ExtResource("7_vha02")]
+layout_mode = 2
+text = "   SFX Volume: "
+audio_bus_name = "SFX"
+
+[node name="VoiceVolumeSlider" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=1960071891 instance=ExtResource("7_vha02")]
+layout_mode = 2
+text = "   Voice Volume: "
+audio_bus_name = "Voice"
+
+[node name="BackMenuButton" parent="CenterMenusContainer/CenterAudioOptionsMenuContainer/VBoxContainer" unique_id=1765179396 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "RETURN TO OPTIONS MENU"
+
+[node name="CenterVideoOptionsMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=83996918]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterVideoOptionsMenuContainer" unique_id=1669187237]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="VideoTitle" parent="CenterMenusContainer/CenterVideoOptionsMenuContainer/VBoxContainer" unique_id=964207229 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+text = "[center]Video Options[/center]"
+
+[node name="FullscreenToggleButton" parent="CenterMenusContainer/CenterVideoOptionsMenuContainer/VBoxContainer" unique_id=309081855 instance=ExtResource("5_7eey7")]
+layout_mode = 2
+value_options = Array[String](["WINDOWED", "FULLSCREEN"])
+
+[node name="BackMenuButton" parent="CenterMenusContainer/CenterVideoOptionsMenuContainer/VBoxContainer" unique_id=1033767630 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "RETURN TO OPTIONS MENU"
+
+[node name="CenterCreditsOptionsMenuContainer" type="CenterContainer" parent="CenterMenusContainer" unique_id=1536194147]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterMenusContainer/CenterCreditsOptionsMenuContainer" unique_id=2086683417]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="CreditsTitle" parent="CenterMenusContainer/CenterCreditsOptionsMenuContainer/VBoxContainer" unique_id=898679233 instance=ExtResource("3_5x4hn")]
+layout_mode = 2
+text = "[center]Credits[/center]"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterMenusContainer/CenterCreditsOptionsMenuContainer/VBoxContainer" unique_id=884285159]
+layout_mode = 2
+theme = ExtResource("1_c0ymv")
+bbcode_enabled = true
+text = "[b]Programming:[/b] ShrikeGames
+[b]Art:[/b]  ShrikeGames
+[b]3D Modeling:[/b]  ShrikeGames
+[b]Voice Acting:[/b]  ShrikeGames
+[b]Music:[/b]  Aaron_Music_YT
+[b]SFX:[/b]  Pixabay"
+fit_content = true
+scroll_active = false
+
+[node name="BackMenuButton" parent="CenterMenusContainer/CenterCreditsOptionsMenuContainer/VBoxContainer" unique_id=2006259734 instance=ExtResource("2_2lj3x")]
+layout_mode = 2
+text = "RETURN TO OPTIONS MENU"

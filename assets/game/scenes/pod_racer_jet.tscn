@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ccgccnb0v4iph"]
+
+[ext_resource type="Script" uid="uid://bkn5dx7grgna8" path="res://assets/game/scripts/pod_racer_jet.gd" id="1_5ddhb"]
+[ext_resource type="PackedScene" uid="uid://bso5sfh2gtdev" path="res://assets/game/models/not_rigged/pod_jet_1.blend" id="2_t7n2m"]
+
+[node name="JetFR" type="MeshInstance3D" unique_id=1834261222 node_paths=PackedStringArray("ray_cast")]
+script = ExtResource("1_5ddhb")
+ray_cast = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=158148641]
+transform = Transform3D(1, 8.742278e-08, 1.3432884e-16, 8.742278e-08, -1, 1.1920929e-07, 8.881784e-15, -1.1920929e-07, -1, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+collision_mask = 2
+
+[node name="pod_jet_1" parent="." unique_id=755423045 instance=ExtResource("2_t7n2m")]
+transform = Transform3D(0.09999999, 0, 0, 0, 0.09999998, 0, 0, 0, 0.09999998, 0, -0.034864485, 0)

@@ -1,0 +1,26 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://b2r7rh54fmnq6"]
+
+[ext_resource type="AudioStream" uid="uid://bey4axjli53ui" path="res://assets/system/menu/assets/ui/sfx/ui_click_soft.wav" id="1_aqwky"]
+[ext_resource type="AudioStream" uid="uid://b2ixljv4m2tby" path="res://assets/system/menu/assets/ui/sfx/ui_click_deep.wav" id="2_x3utu"]
+[ext_resource type="AudioStream" uid="uid://cuhuei5q3lfi8" path="res://assets/system/global/assets/audio/silence.mp3" id="3_ifb6n"]
+
+[resource]
+clip_count = 3
+clip_0/name = &"Hover"
+clip_0/stream = ExtResource("2_x3utu")
+clip_0/auto_advance = 0
+clip_1/name = &"Click"
+clip_1/stream = ExtResource("1_aqwky")
+clip_1/auto_advance = 0
+clip_2/name = &"Silence"
+clip_2/stream = ExtResource("3_ifb6n")
+clip_2/auto_advance = 0
+initial_clip = 2
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+}
+}
