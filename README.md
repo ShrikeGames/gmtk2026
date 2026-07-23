@@ -97,6 +97,9 @@ Negative
 - adjusted physics material for the pod racer so it bounces properly off walls
 - also added similar code to specifically handle sliding on walls
 
+https://github.com/user-attachments/assets/31b38d39-2740-4789-aa8c-1bab09353a00
+
+
 # Day 2
 
 - [TODO] add sound effects
