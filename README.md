@@ -91,8 +91,11 @@ Negative
 
 - Modeled a pod racer
 - Tested modeling some test tracks
-- Got some basic pod racer controls although collisions are a little wonky and it's too floaty
+- Got some basic pod racer controls although collisions are a little wonky
 - menus are in place 
+- figured out how to do similar to my spinning top battles to keep it from flipping over
+- adjusted physics material for the pod racer so it bounces properly off walls
+- also added similar code to specifically handle sliding on walls
 
 # Day 2
 
@@ -102,5 +105,4 @@ Negative
 - [TODO] Create scenes for picking racer and track
 - [TODO] Start on CPU racer AI
 - [TODO] Create 3d bust for character and get it in the game for showing reactions to speed etc
-- [TODO] MAKE IT SO I STOP FLIPPING UPSIDE DOWN
 
