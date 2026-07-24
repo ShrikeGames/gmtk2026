@@ -1,0 +1,75 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://b2cfhv1n3u7vg"]
+
+[ext_resource type="AudioStream" uid="uid://cuhuei5q3lfi8" path="res://assets/system/global/assets/audio/silence.mp3" id="1_lwms0"]
+[ext_resource type="AudioStream" uid="uid://ddr3blqslcyln" path="res://assets/game/audio/sfx/edited/pod_racer_engine_1.wav" id="2_vr36f"]
+[ext_resource type="AudioStream" uid="uid://ddkcrmgpxt6xt" path="res://assets/game/audio/sfx/edited/pod_racer_engine_boost_1.wav" id="3_lwms0"]
+[ext_resource type="AudioStream" uid="uid://dsp3h3tc5pmf8" path="res://assets/game/audio/sfx/edited/pod_racer_engine_boost_2.wav" id="4_5ghec"]
+[ext_resource type="AudioStream" uid="uid://bshlrentxps5u" path="res://assets/game/audio/sfx/edited/pod_racer_engine_boost_3.wav" id="5_eodt6"]
+[ext_resource type="AudioStream" uid="uid://bu8trk8r82e27" path="res://assets/game/audio/sfx/edited/pod_racer_engine_2.wav" id="7_dptrb"]
+[ext_resource type="AudioStream" uid="uid://cbqlc6lsv3lq0" path="res://assets/game/audio/sfx/edited/pod_racer_engine_3.wav" id="8_nbu0r"]
+[ext_resource type="AudioStream" uid="uid://bhqdrdes0ctlc" path="res://assets/game/audio/sfx/edited/pod_racer_engine_4.wav" id="9_r7dy5"]
+[ext_resource type="AudioStream" uid="uid://d8616h84xvw4" path="res://assets/game/audio/sfx/edited/pod_racer_engine_5.wav" id="10_nyo71"]
+[ext_resource type="AudioStream" uid="uid://cb0b0i65uttq1" path="res://assets/game/audio/sfx/edited/pod_racer_engine_6.wav" id="11_it2pg"]
+[ext_resource type="AudioStream" uid="uid://naujm5fqcw6r" path="res://assets/game/audio/sfx/edited/pod_racer_engine_7.wav" id="12_0kk6x"]
+[ext_resource type="AudioStream" uid="uid://dt7esy4itqud" path="res://assets/game/audio/sfx/edited/pod_racer_engine_8.wav" id="13_symed"]
+
+[resource]
+clip_count = 13
+clip_0/name = &"Silence"
+clip_0/stream = ExtResource("1_lwms0")
+clip_0/auto_advance = 0
+clip_1/name = &"Pod Racer Startup"
+clip_1/stream = ExtResource("2_vr36f")
+clip_1/auto_advance = 0
+clip_2/name = &"Pod Racer Engine 1"
+clip_2/stream = ExtResource("7_dptrb")
+clip_2/auto_advance = 1
+clip_2/next_clip = 3
+clip_3/name = &"Pod Racer Engine 2"
+clip_3/stream = ExtResource("8_nbu0r")
+clip_3/auto_advance = 1
+clip_3/next_clip = 4
+clip_4/name = &"Pod Racer Engine 3"
+clip_4/stream = ExtResource("8_nbu0r")
+clip_4/auto_advance = 1
+clip_4/next_clip = 5
+clip_5/name = &"Pod Racer Engine 4"
+clip_5/stream = ExtResource("9_r7dy5")
+clip_5/auto_advance = 1
+clip_5/next_clip = 6
+clip_6/name = &"Pod Racer Engine 5"
+clip_6/stream = ExtResource("10_nyo71")
+clip_6/auto_advance = 1
+clip_6/next_clip = 7
+clip_7/name = &"Pod Racer Engine 6"
+clip_7/stream = ExtResource("11_it2pg")
+clip_7/auto_advance = 1
+clip_7/next_clip = 8
+clip_8/name = &"Pod Racer Engine 7"
+clip_8/stream = ExtResource("12_0kk6x")
+clip_8/auto_advance = 1
+clip_8/next_clip = 9
+clip_9/name = &"Pod Racer Engine 8"
+clip_9/stream = ExtResource("13_symed")
+clip_9/auto_advance = 1
+clip_9/next_clip = 2
+clip_10/name = &"Pod Racer Engine Boost 1"
+clip_10/stream = ExtResource("3_lwms0")
+clip_10/auto_advance = 1
+clip_10/next_clip = 10
+clip_11/name = &"Pod Racer Engine Boost 2"
+clip_11/stream = ExtResource("4_5ghec")
+clip_11/auto_advance = 1
+clip_11/next_clip = 11
+clip_12/name = &"Pod Racer Engine Boost 3"
+clip_12/stream = ExtResource("5_eodt6")
+clip_12/auto_advance = 1
+clip_12/next_clip = 12
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 3,
+"to_time": 1
+}
+}

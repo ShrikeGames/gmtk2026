@@ -1,21 +1,32 @@
 extends RigidBody3D
 class_name PodRacer
 
+signal accelerate
+signal brake
+signal boost
+signal crash
+signal left
+signal right
+@export_category("Controls")
+@export var player_controlled:bool = false
+
 @export_category("Parts")
 @export var jets_node: Node3D
 
 @export_category("Stats")
 @export var turn_force: float = 16.0
 @export var tilt_force: float = 16.0
-@export var max_velocity: float = 120.0
+@export var max_velocity: float = 160.0
+@export var max_boost:float = 2.0
+var current_boost:float = 2.0
 
 @export_category("Jank")
-@export var upright_strength: float = 40.0
+@export var upright_strength: float = 60.0
 @export var local_up_axis: Vector3 = Vector3(1, 0, 0)
 @export var slide_along_walls: bool = true
 
 @export_category("Hover")
-@export var hover_range: float = 1.5
+@export var hover_range: float = 2.0
 @export var hover_stiffness: float = 0.5
 
 @export_category("Debug")
@@ -26,11 +37,13 @@ var wall_normals: Array[Vector3] = []
 
 func _ready() -> void:
 	for jet_part in jets_node.get_children():
+		if jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
+			accelerate.connect(jet_part.activate_jet)
 		jet_parts.append(jet_part)
 
 func _process(_delta: float) -> void:
 	if debug_text:
-		debug_text.text = "%s" % [self.linear_velocity]
+		debug_text.text = "%s %s %s" % [self.linear_velocity, abs(self.linear_velocity.length()), self.current_boost]
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	wall_normals.clear()
@@ -47,12 +60,13 @@ func _slide_thrust(force: Vector3) -> Vector3:
 		var into: float = force.dot(-n)
 		if into > 0.0:
 			force += n * into
+			crash.emit()
 	return force
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	for jet_part in jet_parts:
-		if jet_part.visible and jet_part.activation_key in ["Accelerate", "Brake"]:
-			if abs(self.linear_velocity.length()) < max_velocity:
+		if jet_part.visible and jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
+			if abs(self.linear_velocity.length()) < max_velocity or (Input.is_action_pressed("Boost") and current_boost > 0):
 				var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength
 				force.y = 0
 				force = _slide_thrust(force)
@@ -61,14 +75,11 @@ func _physics_process(_delta: float) -> void:
 		elif jet_part.visible and jet_part.ray_cast.is_colliding():
 			var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength * max(0, (hover_stiffness * (hover_range - jet_part.collision_distance)))
 			self.apply_central_force(force)
-
-	if Input.is_action_pressed("Left"):
-		self.apply_torque(self.global_basis.x.normalized() * turn_force)
-		self.apply_torque(self.global_basis.y.normalized() * tilt_force)
-
-	if Input.is_action_pressed("Right"):
-		self.apply_torque(-self.global_basis.x.normalized() * turn_force)
-		self.apply_torque(-self.global_basis.y.normalized() * tilt_force)
+	
+	if player_controlled:
+		_apply_player_controls(delta)
+	else:
+		_apply_cpu_controls(delta)
 
 	_apply_upright_torque()
 
@@ -78,3 +89,50 @@ func _apply_upright_torque() -> void:
 	var up: Vector3 = (global_basis * local_up_axis).normalized()
 	var correction: Vector3 = up.cross(Vector3.UP)
 	apply_torque(correction * upright_strength)
+
+func _apply_cpu_controls(_delta:float) -> void:
+	pass
+
+func _apply_player_controls(delta:float) -> void:
+	if Input.is_action_just_pressed("Accelerate"):
+		accelerate.emit(true)
+	elif Input.is_action_just_released("Accelerate"):
+		accelerate.emit(false)
+	
+	if Input.is_action_just_pressed("Brake"):
+		brake.emit(true)
+	elif Input.is_action_just_released("Brake"):
+		brake.emit(false)
+		
+	if Input.is_action_just_pressed("Right"):
+		right.emit(true)
+	elif Input.is_action_just_released("Right"):
+		right.emit(false)
+	
+	if Input.is_action_just_pressed("Left"):
+		left.emit(true)
+	elif Input.is_action_just_released("Left"):
+		left.emit(false)
+	
+	
+	if Input.is_action_just_pressed("Boost") and current_boost > 0:
+		boost.emit(true)
+	elif Input.is_action_just_released("Boost"):
+		boost.emit(false)
+	
+	if Input.is_action_pressed("Boost"):
+		if current_boost > 0:
+			current_boost = clampf(current_boost-delta, 0.0, max_boost)
+		else:
+			boost.emit(false)
+			Input.action_release("Boost")
+	elif current_boost < max_boost:
+		current_boost = clampf(current_boost+delta, 0.0, max_boost)
+	
+	if Input.is_action_pressed("Left"):
+		self.apply_torque(self.global_basis.x.normalized() * turn_force)
+		self.apply_torque(self.global_basis.y.normalized() * tilt_force)
+
+	if Input.is_action_pressed("Right"):
+		self.apply_torque(-self.global_basis.x.normalized() * turn_force)
+		self.apply_torque(-self.global_basis.y.normalized() * tilt_force)

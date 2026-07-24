@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cejvhn7otljtf"
+path="res://.godot/imported/Sundays Shadess Aaron_music_YT.ogg-79d2065bb08695545011e1f2a107035d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/game/audio/music/Sundays Shadess Aaron_music_YT.ogg"
+dest_files=["res://.godot/imported/Sundays Shadess Aaron_music_YT.ogg-79d2065bb08695545011e1f2a107035d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

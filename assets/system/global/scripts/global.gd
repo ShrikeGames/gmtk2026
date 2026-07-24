@@ -4,6 +4,43 @@ var save_file_location: String = "user://save_data_v1.json"
 var CHEVRON_LEFT:String = "⟪"
 var CHEVRON_RIGHT:String = "⟫"
 
+var engine_clips:Array[AudioStream] = [
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_1.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_2.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_3.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_4.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_5.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_6.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_7.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_8.wav"),
+]
+var engine_boost_clips:Array[AudioStream] = [
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_boost_1.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_boost_2.wav"),
+	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_boost_3.wav")
+]
+var crash_clips:Array[AudioStream] = [
+	preload("res://assets/game/audio/sfx/edited/bonk1.wav"),
+	preload("res://assets/game/audio/sfx/edited/bonk2.wav"),
+	preload("res://assets/game/audio/sfx/edited/bonk3.wav"),
+	preload("res://assets/game/audio/sfx/edited/bonk4.wav"),
+	preload("res://assets/game/audio/sfx/edited/bonk5.wav"),
+	preload("res://assets/game/audio/sfx/edited/bonk6.wav")
+]
+
+var track_tiles:Dictionary = {
+	"0000": preload("res://assets/game/scenes/road/road_0000.tscn"),
+	"0001": preload("res://assets/game/scenes/road/road_0001.tscn"),
+	"0010": preload("res://assets/game/scenes/road/road_0010.tscn"),
+	"0011": preload("res://assets/game/scenes/road/road_0011.tscn"),
+	"0100": preload("res://assets/game/scenes/road/road_0100.tscn"),
+	"0110": preload("res://assets/game/scenes/road/road_0110.tscn"),
+	"1000": preload("res://assets/game/scenes/road/road_1000.tscn"),
+	"1001": preload("res://assets/game/scenes/road/road_1001.tscn"),
+	"1100": preload("res://assets/game/scenes/road/road_1100.tscn")
+	
+}
+
 var DEFAULT_SAVE_DATA:Dictionary = {
 	"settings": {
 		"toggles": {

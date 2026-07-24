@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bsss805hi0wes" path="res://assets/system/menu/scenes/menu_title.tscn" id="3_5x4hn"]
 [ext_resource type="PackedScene" uid="uid://bg5ltcnyfa3yd" path="res://assets/system/menu/scenes/menu_toggle_button.tscn" id="5_7eey7"]
 [ext_resource type="PackedScene" uid="uid://fo3mc7n2vn6" path="res://assets/system/menu/scenes/menu_volume_slider.tscn" id="7_vha02"]
+[ext_resource type="AudioStream" uid="uid://dbxd3fvcorqqv" path="res://assets/game/audio/music/Midnight city_Aaron_Music_YT.ogg" id="8_y6glk"]
 
 [node name="MainMenu" type="Node2D" unique_id=122280145 node_paths=PackedStringArray("main_menu_container", "continue_menu_button", "start_menu_button", "options_menu_button", "credits_button", "exit_menu_button", "options_menu_container", "game_options_menu_button", "audio_options_menu_button", "video_options_menu_button", "back_options_menu_button", "game_options_menu_container", "back_game_options_menu_button", "audio_options_menu_container", "back_audio_options_menu_button", "video_options_menu_container", "video_options_fullscreen_toggle_menu_button", "back_video_options_menu_button", "credits_menu_container", "back_credits_menu_button")]
 script = ExtResource("1_dgxna")
@@ -225,3 +226,10 @@ scroll_active = false
 [node name="BackMenuButton" parent="CenterMenusContainer/CenterCreditsOptionsMenuContainer/VBoxContainer" unique_id=2006259734 instance=ExtResource("2_2lj3x")]
 layout_mode = 2
 text = "RETURN TO OPTIONS MENU"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=405743722]
+stream = ExtResource("8_y6glk")
+volume_db = -26.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true

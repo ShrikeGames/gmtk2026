@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c3t75n7vj1gxk"
+path="res://.godot/imported/Cat-Shop Aaron_music_YT.ogg-086d79ccdf5773784f6fa45ae080167a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/game/audio/music/Cat-Shop Aaron_music_YT.ogg"
+dest_files=["res://.godot/imported/Cat-Shop Aaron_music_YT.ogg-086d79ccdf5773784f6fa45ae080167a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

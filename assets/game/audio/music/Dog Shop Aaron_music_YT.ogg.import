@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c2ag3ccty808k"
+path="res://.godot/imported/Dog Shop Aaron_music_YT.ogg-20b8050a014546c03364f560cf795f8d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/game/audio/music/Dog Shop Aaron_music_YT.ogg"
+dest_files=["res://.godot/imported/Dog Shop Aaron_music_YT.ogg-20b8050a014546c03364f560cf795f8d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
