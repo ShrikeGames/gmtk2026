@@ -102,10 +102,15 @@ https://github.com/user-attachments/assets/31b38d39-2740-4789-aa8c-1bab09353a00
 
 # Day 2
 
-- [TODO] add sound effects
-- [TODO] fix collision
-- [TODO] keep tweaking physics
+- [Done] add sound effects
+- [Done] keep tweaking physics
+- [DONE] Add HUD for speed, your pod racer, and racer portrait
+- [DONE] Create 3d bust for character and get it in the game for showing reactions to speed etc
+
+
+# Day 3
+
+- [TODO] Create a Sheep racer
+- [TODO] Make logo for main menu
 - [TODO] Create scenes for picking racer and track
 - [TODO] Start on CPU racer AI
-- [TODO] Create 3d bust for character and get it in the game for showing reactions to speed etc
-
