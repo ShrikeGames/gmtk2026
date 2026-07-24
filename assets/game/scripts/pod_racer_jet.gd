@@ -11,8 +11,7 @@ class_name PodRacerJetPart
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if activation_key:
-		self.visible = activated or not activation_key
+	self.visible = activated or not activation_key
 		
 	if ray_cast.is_colliding():
 		collision_distance = abs((self.global_position - ray_cast.get_collision_point()).length())

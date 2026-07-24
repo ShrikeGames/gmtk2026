@@ -8,17 +8,41 @@ signal crash
 signal left
 signal right
 @export_category("Controls")
-@export var player_controlled:bool = false
+@export var player_controlled: bool = false
+@export var camera: Camera3D
+
+@export_category("CPU")
+@export var path_follow: PathFollow3D
+# larger = smoother and better
+@export var cpu_lookahead: float = 200.0
+# has to be above this angle (rad) to steer
+@export var cpu_steer_deadzone: float = 0.05
+# if above this angle will full steer
+@export var cpu_full_steer_angle: float = 0.2
+# too sharp of a turn so brake
+@export var cpu_brake_angle: float = 0.3
+# boost on straight aways
+@export var cpu_boost_angle: float = 0.15
+var is_boosting: bool = false
+var boost_active: bool = false
+var boost_latched: bool = false
+var cpu_accelerating: bool = false
+var cpu_braking: bool = false
+var cpu_boosting: bool = false
+var cpu_left: bool = false
+var cpu_right: bool = false
 
 @export_category("Parts")
 @export var jets_node: Node3D
+@export var portrait_id:int = 0
 
 @export_category("Stats")
+@export var racer_name:String = "Echo"
 @export var turn_force: float = 16.0
 @export var tilt_force: float = 16.0
-@export var max_velocity: float = 160.0
-@export var max_boost:float = 2.0
-var current_boost:float = 2.0
+@export var max_velocity: float = 260.0
+@export var max_boost: float = 2.0
+var current_boost: float = 2.0
 
 @export_category("Jank")
 @export var upright_strength: float = 60.0
@@ -29,16 +53,27 @@ var current_boost:float = 2.0
 @export var hover_range: float = 2.0
 @export var hover_stiffness: float = 0.5
 
+
 @export_category("Debug")
 @export var debug_text: RichTextLabel
 
 var jet_parts: Array[PodRacerJetPart] = []
 var wall_normals: Array[Vector3] = []
 
+
+# Reference thrust jet, used to derive which way the pod actually faces.
+var accelerate_jet: PodRacerJetPart = null
+
 func _ready() -> void:
 	for jet_part in jets_node.get_children():
-		if jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
+		if jet_part.activation_key in ["Accelerate"]:
 			accelerate.connect(jet_part.activate_jet)
+			if accelerate_jet == null:
+				accelerate_jet = jet_part
+		elif jet_part.activation_key in ["Brake"]:
+			brake.connect(jet_part.activate_jet)
+		elif jet_part.activation_key in ["Boost"]:
+			boost.connect(jet_part.activate_jet)
 		jet_parts.append(jet_part)
 
 func _process(_delta: float) -> void:
@@ -64,9 +99,15 @@ func _slide_thrust(force: Vector3) -> Vector3:
 	return force
 
 func _physics_process(delta: float) -> void:
+	# Controls run first so jet activation and is_boosting are fresh this tick.
+	if player_controlled:
+		_apply_player_controls(delta)
+	else:
+		_apply_cpu_controls(delta)
+
 	for jet_part in jet_parts:
 		if jet_part.visible and jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
-			if abs(self.linear_velocity.length()) < max_velocity or (Input.is_action_pressed("Boost") and current_boost > 0):
+			if abs(self.linear_velocity.length()) < max_velocity:
 				var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength
 				force.y = 0
 				force = _slide_thrust(force)
@@ -75,11 +116,6 @@ func _physics_process(delta: float) -> void:
 		elif jet_part.visible and jet_part.ray_cast.is_colliding():
 			var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength * max(0, (hover_stiffness * (hover_range - jet_part.collision_distance)))
 			self.apply_central_force(force)
-	
-	if player_controlled:
-		_apply_player_controls(delta)
-	else:
-		_apply_cpu_controls(delta)
 
 	_apply_upright_torque()
 
@@ -90,10 +126,95 @@ func _apply_upright_torque() -> void:
 	var correction: Vector3 = up.cross(Vector3.UP)
 	apply_torque(correction * upright_strength)
 
-func _apply_cpu_controls(_delta:float) -> void:
-	pass
+# True when a fresh boost is allowed to begin: the meter must be completely full.
+func is_boost_ready() -> bool:
+	return current_boost >= max_boost
 
-func _apply_player_controls(delta:float) -> void:
+func _update_boost(wants_boost: bool, delta: float) -> bool:
+	if boost_active:
+		# Keep going only while still asked for and there's charge left.
+		boost_active = wants_boost and current_boost > 0.0
+	elif wants_boost and is_boost_ready():
+		boost_active = true
+
+	if boost_active:
+		current_boost = clampf(current_boost - delta, 0.0, max_boost)
+		if current_boost <= 0.0:
+			boost_active = false
+	elif current_boost < max_boost:
+		current_boost = clampf(current_boost + delta, 0.0, max_boost)
+
+	boost_latched = _latch(boost_latched, boost_active, boost)
+	is_boosting = boost_active
+	return boost_active
+
+# Emits `sig` only when the state actually changes, mirroring the player's
+# just_pressed / just_released behaviour. Returns the new state.
+func _latch(current: bool, desired: bool, sig: Signal) -> bool:
+	if current != desired:
+		sig.emit(desired)
+	return desired
+
+# The direction the pod actually accelerates in, flattened to the horizontal
+# plane. Derived from the thrust jet so it can't disagree with the physics.
+func _get_forward() -> Vector3:
+	if accelerate_jet != null and accelerate_jet.ray_cast != null:
+		var f: Vector3 = accelerate_jet.ray_cast.global_transform.basis.y
+		f.y = 0.0
+		if f.length() > 0.001:
+			return f.normalized()
+	# Fall back to travel direction if the jet isn't usable yet.
+	var v: Vector3 = linear_velocity
+	v.y = 0.0
+	if v.length() > 0.1:
+		return v.normalized()
+	return -global_basis.z
+
+# Slides the PathFollow3D to sit `cpu_lookahead` ahead of wherever the pod
+# currently is on the curve, so the aim point tracks us instead of drifting.
+func _update_path_target() -> void:
+	var path: Path3D = path_follow.get_parent() as Path3D
+	if path == null or path.curve == null:
+		return
+	var closest_offset: float = path.curve.get_closest_offset(path.to_local(global_position))
+	path_follow.progress = closest_offset + cpu_lookahead
+
+func _apply_cpu_controls(delta: float) -> void:
+	if path_follow == null:
+		return
+		
+	_update_path_target()
+	
+	var to_target: Vector3 = path_follow.global_position - global_position
+	to_target.y = 0.0
+	if to_target.length() < 0.001:
+		return
+	to_target = to_target.normalized()
+
+	var steer_angle: float = _get_forward().signed_angle_to(to_target, Vector3.UP)
+	var abs_angle: float = absf(steer_angle)
+	
+	var want_left: bool = steer_angle > cpu_steer_deadzone
+	var want_right: bool = steer_angle < -cpu_steer_deadzone
+	var want_brake: bool = abs_angle > cpu_brake_angle and abs(linear_velocity.length()) > max_velocity * 0.4
+	var want_accel: bool = not want_brake
+	var want_boost: bool = abs_angle < cpu_boost_angle and not want_brake
+
+	cpu_left = _latch(cpu_left, want_left, left)
+	cpu_right = _latch(cpu_right, want_right, right)
+	cpu_accelerating = _latch(cpu_accelerating, want_accel, accelerate)
+	cpu_braking = _latch(cpu_braking, want_brake, brake)
+
+	cpu_boosting = _update_boost(want_boost, delta)
+
+
+	if want_left or want_right:
+		var steer_strength: float = clampf(abs_angle / cpu_full_steer_angle, 0.0, 1.0)
+		var steer_dir: float = 1.0 if want_left else -1.0
+		apply_torque(global_basis.x.normalized() * turn_force * steer_strength * steer_dir)
+		apply_torque(global_basis.y.normalized() * tilt_force * steer_strength * steer_dir)
+
+func _apply_player_controls(delta: float) -> void:
 	if Input.is_action_just_pressed("Accelerate"):
 		accelerate.emit(true)
 	elif Input.is_action_just_released("Accelerate"):
@@ -114,20 +235,7 @@ func _apply_player_controls(delta:float) -> void:
 	elif Input.is_action_just_released("Left"):
 		left.emit(false)
 	
-	
-	if Input.is_action_just_pressed("Boost") and current_boost > 0:
-		boost.emit(true)
-	elif Input.is_action_just_released("Boost"):
-		boost.emit(false)
-	
-	if Input.is_action_pressed("Boost"):
-		if current_boost > 0:
-			current_boost = clampf(current_boost-delta, 0.0, max_boost)
-		else:
-			boost.emit(false)
-			Input.action_release("Boost")
-	elif current_boost < max_boost:
-		current_boost = clampf(current_boost+delta, 0.0, max_boost)
+	_update_boost(Input.is_action_pressed("Boost"), delta)
 	
 	if Input.is_action_pressed("Left"):
 		self.apply_torque(self.global_basis.x.normalized() * turn_force)
