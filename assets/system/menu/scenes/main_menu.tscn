@@ -3,7 +3,8 @@
 [ext_resource type="Theme" uid="uid://cvbr13mu1wmpr" path="res://assets/system/menu/assets/themes/menu_theme.tres" id="1_c0ymv"]
 [ext_resource type="Script" uid="uid://db08qrkxgo1wp" path="res://assets/system/menu/scripts/main_menu.gd" id="1_dgxna"]
 [ext_resource type="PackedScene" uid="uid://m34pi88kuk80" path="res://assets/system/menu/scenes/menu_button.tscn" id="2_2lj3x"]
-[ext_resource type="Texture2D" uid="uid://bgyx6ijgjr5ry" path="res://assets/system/menu/assets/ui/placeholders/menu_logo.png" id="2_swo2c"]
+[ext_resource type="Texture2D" uid="uid://ceok1ob3bq25l" path="res://assets/system/menu/assets/ui/background.png" id="2_rtk1k"]
+[ext_resource type="Texture2D" uid="uid://yv5wqb5ywlps" path="res://assets/system/menu/assets/ui/logo.png" id="2_y6glk"]
 [ext_resource type="PackedScene" uid="uid://bsss805hi0wes" path="res://assets/system/menu/scenes/menu_title.tscn" id="3_5x4hn"]
 [ext_resource type="PackedScene" uid="uid://bg5ltcnyfa3yd" path="res://assets/system/menu/scenes/menu_toggle_button.tscn" id="5_7eey7"]
 [ext_resource type="PackedScene" uid="uid://fo3mc7n2vn6" path="res://assets/system/menu/scenes/menu_volume_slider.tscn" id="7_vha02"]
@@ -36,9 +37,20 @@ back_credits_menu_button = NodePath("CenterMenusContainer/CenterCreditsOptionsMe
 offset_right = 1920.0
 offset_bottom = 400.0
 
-[node name="MenuLogo" type="Sprite2D" parent="CenterLogoHeaderContainer" unique_id=1024340101]
+[node name="Background" type="Sprite2D" parent="CenterLogoHeaderContainer" unique_id=1032719217]
+position = Vector2(960, 540)
+texture = ExtResource("2_rtk1k")
+
+[node name="Logo" type="Sprite2D" parent="CenterLogoHeaderContainer" unique_id=419980355]
 position = Vector2(960, 200)
-texture = ExtResource("2_swo2c")
+texture = ExtResource("2_y6glk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1491888058]
+custom_minimum_size = Vector2(1920, 680)
+offset_top = 400.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.23921569, 0.23921569, 0.23921569, 0.5411765)
 
 [node name="CenterMenusContainer" type="CenterContainer" parent="." unique_id=323618516]
 offset_top = 400.0
