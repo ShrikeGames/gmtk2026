@@ -8,6 +8,8 @@ class_name SpeedHUD
 @export var textbox:RichTextLabel
 @export var name_textbox:RichTextLabel
 @export var racer_portrait:Node3D
+@export var lap_counter_text:RichTextLabel
+
 var initial_rotation:Vector3
 
 var pitch_right:float = 0
@@ -32,6 +34,7 @@ func change_racer(new_pod_racer:PodRacer, new_racer_portrait:Node3D):
 	
 func _update_connections():
 	name_textbox.text = "%s"%[pod_racer.racer_name]
+	
 	pod_racer.accelerate.connect(_pod_racer_accelerate)
 	pod_racer.boost.connect(_pod_racer_boost)
 	pod_racer.brake.connect(_pod_racer_brake)
@@ -80,3 +83,4 @@ func _process(_delta: float) -> void:
 	
 func _update_textbox():
 	textbox.text = "[color=green]%skm/h[/color]\n[color=yellow]%ss[/color]"%[int(abs(pod_racer.linear_velocity.length())), snappedf(boostmeter.value, 0.01)]
+	lap_counter_text.text = "Lap %s\nCheckpoint %s"%[max(1, pod_racer.current_lap), max(0, pod_racer.current_checkpoint)+1]

@@ -133,8 +133,8 @@ text = "[center]Game Options[/center]"
 [node name="DifficultyToggleButton" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=1015740416 instance=ExtResource("5_7eey7")]
 layout_mode = 2
 text = "DIFFICULTY:"
-value_options = Array[String](["EASY", "NORMAL", "HARD"])
-value_id = 1
+value_options = Array[String](["JOURNALIST", "EASY", "NORMAL", "HARD"])
+value_id = 2
 settings_name = "difficulty"
 
 [node name="TutorialToggleButton" parent="CenterMenusContainer/CenterGameOptionsMenuContainer/VBoxContainer" unique_id=223336301 instance=ExtResource("5_7eey7")]
@@ -241,7 +241,6 @@ text = "RETURN TO OPTIONS MENU"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=405743722]
 stream = ExtResource("8_y6glk")
-volume_db = -26.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true

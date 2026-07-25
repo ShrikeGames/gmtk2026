@@ -1,0 +1,630 @@
+[gd_scene format=3 uid="uid://dh8hb1vcncxok"]
+
+[ext_resource type="Texture2D" uid="uid://ceok1ob3bq25l" path="res://assets/system/menu/assets/ui/background.png" id="1_0ll68"]
+[ext_resource type="Texture2D" uid="uid://bnwn0ffpr7fu7" path="res://assets/system/menu/assets/ui/campaign_screen/campaign_character_grid.png" id="1_o6viy"]
+[ext_resource type="PackedScene" uid="uid://bqx3p3myi0mqp" path="res://assets/game/models/not_rigged/racer_1.blend" id="1_wj6x1"]
+[ext_resource type="PackedScene" uid="uid://c28mivssp3s72" path="res://assets/game/models/not_rigged/pod_racer_1.blend" id="2_7mmm5"]
+[ext_resource type="Texture2D" uid="uid://bld36r2112sr1" path="res://assets/system/menu/assets/ui/campaign_screen/campaign_calendar_grid.png" id="2_c3pn8"]
+[ext_resource type="Theme" uid="uid://cvbr13mu1wmpr" path="res://assets/system/menu/assets/themes/menu_theme.tres" id="2_w60mt"]
+[ext_resource type="Script" uid="uid://b650kmuia2w3u" path="res://assets/system/menu/scripts/campaign_menu.gd" id="2_xo0ig"]
+[ext_resource type="PackedScene" uid="uid://m34pi88kuk80" path="res://assets/system/menu/scenes/menu_button.tscn" id="3_c3pn8"]
+[ext_resource type="PackedScene" uid="uid://b727ruhuoyw78" path="res://assets/game/models/not_rigged/racer_2.blend" id="3_o6viy"]
+[ext_resource type="PackedScene" uid="uid://co2j2jv51sffa" path="res://assets/game/models/not_rigged/pod_racer_2.blend" id="4_w60mt"]
+[ext_resource type="PackedScene" uid="uid://dlvxyby08isq6" path="res://assets/game/models/not_rigged/racer_3.blend" id="5_0ll68"]
+[ext_resource type="AudioStream" uid="uid://c3t75n7vj1gxk" path="res://assets/game/audio/music/Cat-Shop Aaron_music_YT.ogg" id="5_m7bmv"]
+[ext_resource type="PackedScene" uid="uid://2hysiu1y8tt3" path="res://assets/game/models/not_rigged/pod_racer_3.blend" id="6_c3pn8"]
+[ext_resource type="Script" uid="uid://bjpa7h0saq457" path="res://assets/system/menu/scripts/day_score_results.gd" id="7_3fbsc"]
+[ext_resource type="PackedScene" uid="uid://yx7o4lkq8mnv" path="res://assets/game/models/not_rigged/racer_4.blend" id="7_6een8"]
+[ext_resource type="PackedScene" uid="uid://5uj85w25lgp" path="res://assets/game/models/not_rigged/pod_racer_4.blend" id="8_bteaw"]
+[ext_resource type="Script" uid="uid://cvfcnr0v2u8p2" path="res://assets/system/menu/scripts/visible_when_unlocked.gd" id="10_8ifwd"]
+[ext_resource type="PackedScene" uid="uid://dhbkh02b4quq4" path="res://assets/game/models/not_rigged/campaign_track_0.blend" id="14_6een8"]
+[ext_resource type="ButtonGroup" uid="uid://c4cayp6i20sfg" path="res://assets/system/menu/assets/ui/campaign_character_button_group.tres" id="17_2vtdl"]
+[ext_resource type="Texture2D" uid="uid://h4t17jxpgjj0" path="res://assets/system/menu/assets/ui/campaign_screen/campaign_grid_item_normal.png" id="17_h3gb2"]
+[ext_resource type="Texture2D" uid="uid://cejwg5nxhs5mi" path="res://assets/system/menu/assets/ui/campaign_screen/campaign_grid_item_selected.png" id="18_wsd63"]
+[ext_resource type="Texture2D" uid="uid://b8mskwukh86hg" path="res://assets/system/menu/assets/ui/campaign_screen/campaign_grid_item_hover.png" id="19_2vtdl"]
+[ext_resource type="Script" uid="uid://c8v0gef8ihtxf" path="res://assets/system/menu/scripts/disable_when_not_unlocked.gd" id="20_wsd63"]
+[ext_resource type="ButtonGroup" uid="uid://rltu386oktvm" path="res://assets/system/menu/assets/ui/campaign_track_button_group.tres" id="23_m7bmv"]
+[ext_resource type="PackedScene" uid="uid://c4xpdpgsugq5r" path="res://assets/game/models/not_rigged/campaign_track1_new.blend" id="24_mhac1"]
+
+[node name="CampaignMenu" type="Node3D" unique_id=1725175036]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2074924947]
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer" unique_id=404245601]
+position = Vector2(960, 540)
+texture = ExtResource("1_0ll68")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=704786507]
+custom_minimum_size = Vector2(1920, 256)
+offset_top = 727.0
+offset_right = 1920.0
+offset_bottom = 1077.0
+color = Color(0.23921569, 0.23921569, 0.23921569, 0.5411765)
+
+[node name="MainMenu" type="Node2D" parent="CanvasLayer" unique_id=122280145]
+
+[node name="CenterMenusContainer" type="CenterContainer" parent="CanvasLayer/MainMenu" unique_id=323618516 node_paths=PackedStringArray("main_menu_container", "challenge_champion_menu_button", "start_menu_button", "return_to_menu_menu_button", "exit_menu_button")]
+offset_left = 1306.0
+offset_top = 732.0
+offset_right = 1920.0
+offset_bottom = 1132.0
+script = ExtResource("2_xo0ig")
+main_menu_container = NodePath("CenterMainMenuContainer")
+challenge_champion_menu_button = NodePath("CenterMainMenuContainer/VBoxContainer/ChallengeChampionButton")
+start_menu_button = NodePath("CenterMainMenuContainer/VBoxContainer/PlayButton")
+return_to_menu_menu_button = NodePath("CenterMainMenuContainer/VBoxContainer/ReturnMenuButton")
+exit_menu_button = NodePath("CenterMainMenuContainer/VBoxContainer/ExitMenuButton")
+
+[node name="CenterMainMenuContainer" type="CenterContainer" parent="CanvasLayer/MainMenu/CenterMenusContainer" unique_id=986869317]
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/CenterMenusContainer/CenterMainMenuContainer" unique_id=41769692]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="ChallengeChampionButton" parent="CanvasLayer/MainMenu/CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=1991195594 instance=ExtResource("3_c3pn8")]
+layout_mode = 2
+disabled = true
+text = "CHALLENGE CHAMPION"
+
+[node name="PlayButton" parent="CanvasLayer/MainMenu/CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=131115008 instance=ExtResource("3_c3pn8")]
+layout_mode = 2
+text = "CHALLENGE SELECTED TRACK"
+
+[node name="ReturnMenuButton" parent="CanvasLayer/MainMenu/CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=2091668030 instance=ExtResource("3_c3pn8")]
+layout_mode = 2
+text = "SAVE AND RETURN TO MENU"
+
+[node name="ExitMenuButton" parent="CanvasLayer/MainMenu/CenterMenusContainer/CenterMainMenuContainer/VBoxContainer" unique_id=156049495 instance=ExtResource("3_c3pn8")]
+layout_mode = 2
+text = "SAVE AND QUIT GAME"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MainMenu" unique_id=405743722]
+stream = ExtResource("5_m7bmv")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="CampaignCalendarGrid" type="Sprite2D" parent="CanvasLayer" unique_id=345527128]
+position = Vector2(1593, 460)
+scale = Vector2(0.6646355, 0.6646355)
+texture = ExtResource("2_c3pn8")
+
+[node name="DayScoreResults" type="Node2D" parent="CanvasLayer" unique_id=1274108310 node_paths=PackedStringArray("total_score_text", "challenge_button")]
+script = ExtResource("7_3fbsc")
+total_score_text = NodePath("TotalScoreText")
+challenge_button = NodePath("../MainMenu/CenterMenusContainer/CenterMainMenuContainer/VBoxContainer/ChallengeChampionButton")
+
+[node name="DayText1" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=1117430522]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1343.0
+offset_top = 208.0
+offset_right = 1502.0
+offset_bottom = 367.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayText2" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=2011515150]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1515.0
+offset_top = 208.0
+offset_right = 1674.0
+offset_bottom = 367.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayText3" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=1452441429]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1681.0
+offset_top = 208.0
+offset_right = 1840.0
+offset_bottom = 367.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayText4" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=1374431338]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1343.0
+offset_top = 380.0
+offset_right = 1502.0
+offset_bottom = 539.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayText5" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=1291428197]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1515.0
+offset_top = 380.0
+offset_right = 1674.0
+offset_bottom = 539.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayText6" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=490660292]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1681.0
+offset_top = 380.0
+offset_right = 1840.0
+offset_bottom = 539.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalScoreText" type="RichTextLabel" parent="CanvasLayer/DayScoreResults" unique_id=879384107]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 1346.0
+offset_top = 552.0
+offset_right = 1842.0
+offset_bottom = 703.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "5/15"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeTitle" type="RichTextLabel" parent="CanvasLayer" unique_id=1576882555]
+custom_minimum_size = Vector2(512, 0)
+offset_left = 1337.0
+offset_top = -11.0
+offset_right = 1849.0
+offset_bottom = 199.0
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "Day 1
+6 Days Remain"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1583442816]
+offset_right = 1153.0
+offset_bottom = 208.0
+
+[node name="CampaignCharacterGrid" type="Sprite2D" parent="CanvasLayer/CenterContainer" unique_id=1898184935]
+position = Vector2(578, 459)
+texture = ExtResource("1_o6viy")
+
+[node name="CharacterTitle" type="RichTextLabel" parent="CanvasLayer/CenterContainer" unique_id=234906126]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 72
+text = "Choose your Resonance Racer"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="character_portraits" type="Node2D" parent="CanvasLayer" unique_id=845591624]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/character_portraits" unique_id=2063385490]
+offset_left = 67.0
+offset_top = 206.0
+offset_right = 323.0
+offset_bottom = 462.0
+
+[node name="RacerName" type="RichTextLabel" parent="CanvasLayer/character_portraits/SubViewportContainer" unique_id=1393604338]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Velocity"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/character_portraits/SubViewportContainer" unique_id=1271519128]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="racer_1" parent="CanvasLayer/character_portraits/SubViewportContainer/SubViewport" unique_id=1163576583 instance=ExtResource("1_wj6x1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2000, 0, 0)
+
+[node name="pod_racer_1" parent="CanvasLayer/character_portraits/SubViewportContainer/SubViewport" unique_id=1114606114 instance=ExtResource("2_7mmm5")]
+transform = Transform3D(-3.090862e-08, 0.7071067, 0.7071068, -1, -4.371139e-08, 0, 3.090862e-08, -0.7071068, 0.7071067, -2000.9076, 0, 3.7086263)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/character_portraits/SubViewportContainer/SubViewport" unique_id=413733088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2000.5061, 1.4362664, 12.121046)
+fov = 52.7
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/character_portraits/SubViewportContainer/SubViewport" unique_id=1062168751]
+transform = Transform3D(0.95961165, -0.2771518, 0.048293807, 0.18035322, 0.73780173, 0.65047765, -0.21591233, -0.61549604, 0.75798833, -1999.0554, 14.808487, 21.14346)
+light_energy = 16.0
+spot_range = 91.83838
+spot_angle = 22.216389
+script = ExtResource("10_8ifwd")
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="CanvasLayer/character_portraits" unique_id=914614827]
+offset_left = 321.0
+offset_top = 205.0
+offset_right = 577.0
+offset_bottom = 461.0
+
+[node name="RacerName" type="RichTextLabel" parent="CanvasLayer/character_portraits/SubViewportContainer2" unique_id=1516148775]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Justice"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport2" type="SubViewport" parent="CanvasLayer/character_portraits/SubViewportContainer2" unique_id=161041117]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="racer_2" parent="CanvasLayer/character_portraits/SubViewportContainer2/SubViewport2" unique_id=673455713 instance=ExtResource("3_o6viy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2050, 0, 0)
+
+[node name="pod_racer_2" parent="CanvasLayer/character_portraits/SubViewportContainer2/SubViewport2" unique_id=1064226782 instance=ExtResource("4_w60mt")]
+transform = Transform3D(-5.971087e-08, 0.5, 0.8660254, -1, -4.371139e-08, -4.371139e-08, 1.5999479e-08, -0.8660254, 0.5, -2050.3823, 2.3841858e-07, 3.7242136)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/character_portraits/SubViewportContainer2/SubViewport2" unique_id=1990232481]
+transform = Transform3D(0.9596117, -0.27715182, 0.04829379, 0.18035324, 0.7378018, 0.6504777, -0.21591234, -0.6154961, 0.75798845, -2049.495, 14.808487, 21.14346)
+light_energy = 16.0
+spot_range = 91.83838
+spot_angle = 22.216389
+script = ExtResource("10_8ifwd")
+character_id = 1
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/character_portraits/SubViewportContainer2/SubViewport2" unique_id=1863117146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2051.2546, 1.4362664, 12.121046)
+fov = 52.7
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="CanvasLayer/character_portraits" unique_id=420249379]
+offset_left = 578.0
+offset_top = 205.0
+offset_right = 834.0
+offset_bottom = 461.0
+
+[node name="RacerName" type="RichTextLabel" parent="CanvasLayer/character_portraits/SubViewportContainer3" unique_id=1481219476]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Boundary Line"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport3" type="SubViewport" parent="CanvasLayer/character_portraits/SubViewportContainer3" unique_id=1294716271]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="racer_3" parent="CanvasLayer/character_portraits/SubViewportContainer3/SubViewport3" unique_id=2023862394 instance=ExtResource("5_0ll68")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2100, 0, 1.801)
+
+[node name="pod_racer_3" parent="CanvasLayer/character_portraits/SubViewportContainer3/SubViewport3" unique_id=1467132009 instance=ExtResource("6_c3pn8")]
+transform = Transform3D(-0.7071067, 0.7071068, -3.0908623e-08, 0, -4.371139e-08, -1, -0.7071068, -0.7071067, 3.0908613e-08, -2100.0864, 0, 4.5515347)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/character_portraits/SubViewportContainer3/SubViewport3" unique_id=138324097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2099.836, 1.4362664, 12.121046)
+fov = 52.7
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/character_portraits/SubViewportContainer3/SubViewport3" unique_id=2011838541]
+transform = Transform3D(0.9596117, -0.27715182, 0.0482938, 0.18035324, 0.7378018, 0.6504777, -0.21591234, -0.6154961, 0.75798845, -2096.5347, 14.808487, 21.14346)
+light_energy = 16.0
+spot_range = 91.83838
+spot_angle = 22.216389
+script = ExtResource("10_8ifwd")
+character_id = 2
+
+[node name="SubViewportContainer4" type="SubViewportContainer" parent="CanvasLayer/character_portraits" unique_id=2101697858]
+offset_left = 834.0
+offset_top = 204.0
+offset_right = 1090.0
+offset_bottom = 460.0
+
+[node name="RacerName" type="RichTextLabel" parent="CanvasLayer/character_portraits/SubViewportContainer4" unique_id=1538448731]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Shrike"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport4" type="SubViewport" parent="CanvasLayer/character_portraits/SubViewportContainer4" unique_id=1004987270]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="racer_4" parent="CanvasLayer/character_portraits/SubViewportContainer4/SubViewport4" unique_id=1593887414 instance=ExtResource("7_6een8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2150, 0, 0)
+
+[node name="pod_racer_42" parent="CanvasLayer/character_portraits/SubViewportContainer4/SubViewport4" unique_id=1412633831 instance=ExtResource("8_bteaw")]
+transform = Transform3D(0.6697011, 0.7426308, 3.2461422e-08, 0, -4.371139e-08, 1, 0.7426308, -0.6697011, -2.9273565e-08, -2151.1982, 0, 5.1053734)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/character_portraits/SubViewportContainer4/SubViewport4" unique_id=1944097416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2149.8442, 1.4362664, 12.121046)
+fov = 52.7
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/character_portraits/SubViewportContainer4/SubViewport4" unique_id=1045311933]
+transform = Transform3D(0.9596117, -0.27715182, 0.04829379, 0.18035324, 0.7378018, 0.6504777, -0.21591234, -0.6154961, 0.75798845, -2147.9995, 14.808487, 21.14346)
+light_energy = 16.0
+spot_range = 91.83838
+spot_angle = 22.216389
+script = ExtResource("10_8ifwd")
+character_id = 3
+
+[node name="RacerSelectGrid" type="GridContainer" parent="CanvasLayer/character_portraits" unique_id=1218338190]
+offset_left = 66.0
+offset_top = 203.0
+offset_right = 1133.0
+offset_bottom = 754.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="RacerSelect1" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=832802138]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+
+[node name="RacerSelect2" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=1358442464]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 1
+
+[node name="RacerSelect3" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=1488808864]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 2
+
+[node name="RacerSelect4" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=652815623]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 3
+
+[node name="RacerSelect5" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=1361043801]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 4
+
+[node name="RacerSelect6" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=2054472311]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 5
+
+[node name="RacerSelect7" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=1782511981]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 6
+
+[node name="RacerSelect8" type="TextureButton" parent="CanvasLayer/character_portraits/RacerSelectGrid" unique_id=1298005577]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("17_2vtdl")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 7
+
+[node name="track_portraits" type="Node2D" parent="CanvasLayer" unique_id=1753595092]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/track_portraits" unique_id=2073160223]
+offset_left = 67.0
+offset_top = 772.0
+offset_right = 323.0
+offset_bottom = 1028.0
+
+[node name="TrackName" type="RichTextLabel" parent="CanvasLayer/track_portraits/SubViewportContainer" unique_id=2010753292]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Boundry Line's
+Speedway"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/track_portraits/SubViewportContainer" unique_id=1758495042]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="campaign_track_0" parent="CanvasLayer/track_portraits/SubViewportContainer/SubViewport" unique_id=1690471090 instance=ExtResource("14_6een8")]
+transform = Transform3D(0.84133154, 0, 0.5405194, 0, 1, 0, -0.5405194, 0, 0.84133154, 2005.166, 0, 7.5431976)
+
+[node name="racer_3" parent="CanvasLayer/track_portraits/SubViewportContainer/SubViewport" unique_id=1421957300 instance=ExtResource("5_0ll68")]
+transform = Transform3D(2.643927, -0.26180577, 1.3932363, -0.43424404, 2.6570947, 1.3233596, -1.3494751, -1.3679564, 2.3038251, 1996.8546, 23.880796, 41.074425)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/track_portraits/SubViewportContainer/SubViewport" unique_id=1820242545]
+transform = Transform3D(1, 0, 0, 0, 0.8538962, 0.52044344, 0, -0.52044344, 0.8538962, 1998.0785, 31.306204, 44.190598)
+fov = 52.7
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/track_portraits/SubViewportContainer/SubViewport" unique_id=1706498147]
+transform = Transform3D(0.9596117, -0.27715185, 0.04829379, 0.22093548, 0.8486985, 0.4805189, -0.17416357, -0.45044178, 0.8756536, 2000, 33.19481, 46.004433)
+light_energy = 16.0
+spot_range = 72.626335
+spot_angle = 52.931065
+script = ExtResource("10_8ifwd")
+character_id = 1
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="CanvasLayer/track_portraits" unique_id=1930871029]
+offset_left = 324.0
+offset_top = 772.0
+offset_right = 580.0006
+offset_bottom = 1028.0
+
+[node name="TrackName" type="RichTextLabel" parent="CanvasLayer/track_portraits/SubViewportContainer2" unique_id=1472482099]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme = ExtResource("2_w60mt")
+theme_override_constants/outline_size = 15
+text = "Shrike's
+Blood Basin"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport2" type="SubViewport" parent="CanvasLayer/track_portraits/SubViewportContainer2" unique_id=838768772]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="campaign_track1_new" parent="CanvasLayer/track_portraits/SubViewportContainer2/SubViewport2" unique_id=1616953984 instance=ExtResource("24_mhac1")]
+transform = Transform3D(-0.7575992, -1.9452573e-08, -0.65272003, 0, 1, -2.9802322e-08, 0.65272003, -2.2578215e-08, -0.7575992, 2184.6243, 1.9073486e-06, 9.410557)
+
+[node name="racer_4" parent="CanvasLayer/track_portraits/SubViewportContainer2/SubViewport2" unique_id=795144358 instance=ExtResource("7_6een8")]
+transform = Transform3D(0.8950266, 0.007975414, 0.44594163, -0.16394515, 0.93572634, 0.312311, -0.4147885, -0.3526366, 0.8388074, 2182.6284, 26.302713, 40.876514)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/track_portraits/SubViewportContainer2/SubViewport2" unique_id=1587264917]
+transform = Transform3D(1, 0, 0, 0, 0.8538962, 0.52044344, 0, -0.52044344, 0.8538962, 2183.7964, 31.306204, 44.190598)
+fov = 52.7
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CanvasLayer/track_portraits/SubViewportContainer2/SubViewport2" unique_id=526410951]
+transform = Transform3D(0.9596117, -0.27715185, 0.04829379, 0.22093548, 0.8486985, 0.4805189, -0.17416357, -0.45044178, 0.8756536, 2186.8064, 33.19481, 46.004433)
+light_energy = 16.0
+spot_range = 72.626335
+spot_angle = 52.931065
+script = ExtResource("10_8ifwd")
+character_id = 2
+
+[node name="TrackSelectGrid" type="GridContainer" parent="CanvasLayer/track_portraits" unique_id=766972448]
+offset_left = 65.0
+offset_top = 775.0
+offset_right = 1132.0
+offset_bottom = 1073.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="TrackSelect1" type="TextureButton" parent="CanvasLayer/track_portraits/TrackSelectGrid" unique_id=1796947744]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("23_m7bmv")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 1
+track_select = true
+
+[node name="TrackSelect2" type="TextureButton" parent="CanvasLayer/track_portraits/TrackSelectGrid" unique_id=521446902]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("23_m7bmv")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 2
+track_select = true
+
+[node name="TrackSelect3" type="TextureButton" parent="CanvasLayer/track_portraits/TrackSelectGrid" unique_id=1708363148]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("23_m7bmv")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 3
+track_select = true
+
+[node name="TrackSelect4" type="TextureButton" parent="CanvasLayer/track_portraits/TrackSelectGrid" unique_id=1289430589]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("23_m7bmv")
+texture_normal = ExtResource("17_h3gb2")
+texture_pressed = ExtResource("18_wsd63")
+texture_hover = ExtResource("19_2vtdl")
+script = ExtResource("20_wsd63")
+character_id = 4
+track_select = true

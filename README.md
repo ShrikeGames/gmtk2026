@@ -110,6 +110,33 @@ https://github.com/user-attachments/assets/31b38d39-2740-4789-aa8c-1bab09353a00
 
 # Day 3
 
-- [TODO] Create a Sheep racer
-- [TODO] Create scenes for picking racer and track
-- [TODO] Start on CPU racer AI
+- [DONE] Create scenes for picking racer and track
+- [DONE] Start on CPU racer AI
+- [DONE] Make up to 4 racers
+
+# DAY 4 (Saturday)
+
+- Respawn mechanic
+- Pod Racer damage + HUD element showing the damage
+- Make 4 more racers for 8 total
+- Make 2 more race courses
+- Make it so you unlock 2 characters per win
+- Voices for announcer and the different characters
+- Trigger voice lines when pod racers pass others
+- Itch io page for playtesting
+
+Racer 1 Velocity 速度
+Racer 2 Justice 正義
+Racer 3 Boundary Line 境界線
+Racer 4 Shrike 大百舌
+Racer 5 Sakura 桜
+Racer 6 Rich 富裕
+Racer 7 Sheep 羊
+Racer 8 NoiR のわ子
+
+Playtest URL:
+https://shrikegames.itch.io/resonance-racer?secret=bI1pjxFmEdsCcLGqyJa2j4UsOIY
+
+# Day 5 (Sunday until 2pm)
+
+- 

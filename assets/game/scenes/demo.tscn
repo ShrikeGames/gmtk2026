@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://duhn8quvuoton"]
+
+[ext_resource type="PackedScene" uid="uid://ddqpvmqmva2en" path="res://assets/game/scenes/pod_racer_1.scn" id="1_qy6y7"]
+[ext_resource type="PackedScene" uid="uid://xpp6yiorxf8q" path="res://assets/game/scenes/pod_racer_2.scn" id="2_a37ov"]
+[ext_resource type="PackedScene" uid="uid://bhtp8kbjacvxc" path="res://assets/game/scenes/pod_racer_3.scn" id="3_esukd"]
+[ext_resource type="PackedScene" uid="uid://brus16ma3sopb" path="res://assets/game/scenes/pod_racer_4.scn" id="4_erxsm"]
+[ext_resource type="PackedScene" uid="uid://bqx3p3myi0mqp" path="res://assets/game/models/not_rigged/racer_1.blend" id="5_vxh2a"]
+[ext_resource type="PackedScene" uid="uid://b727ruhuoyw78" path="res://assets/game/models/not_rigged/racer_2.blend" id="6_w7011"]
+[ext_resource type="PackedScene" uid="uid://dlvxyby08isq6" path="res://assets/game/models/not_rigged/racer_3.blend" id="7_f3sea"]
+[ext_resource type="PackedScene" uid="uid://yx7o4lkq8mnv" path="res://assets/game/models/not_rigged/racer_4.blend" id="8_0acfw"]
+
+[node name="Demo" type="Node3D" unique_id=1536115616]
+
+[node name="pod_racer_1" parent="." unique_id=224688751 instance=ExtResource("1_qy6y7")]
+transform = Transform3D(2.1073424e-08, -0.70710677, 0.70710677, 1, 2.9802322e-08, 0, -2.1073424e-08, 0.70710677, 0.70710677, 0.27125907, -0.021275043, -7.0218444)
+
+[node name="pod_racer_2" parent="." unique_id=2028616544 instance=ExtResource("2_a37ov")]
+transform = Transform3D(2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0, 1, 0.27125907, -0.021275043, -0.10015607)
+
+[node name="pod_racer_3" parent="." unique_id=2050965239 instance=ExtResource("3_esukd")]
+transform = Transform3D(1.490116e-08, -0.49999997, -0.86602545, 1, 2.9802322e-08, 0, 2.580957e-08, -0.86602545, 0.49999997, -2.1392624, -0.021275043, 5.128842)
+
+[node name="pod_racer_4" parent="." unique_id=870098033 instance=ExtResource("4_erxsm")]
+transform = Transform3D(1.490116e-08, -0.49999997, 0.86602545, 1, 2.9802322e-08, 0, -2.580957e-08, 0.86602545, 0.49999997, -6.5790005, -0.021275043, -8.474518)
+
+[node name="racer_1" parent="." unique_id=1163576583 instance=ExtResource("5_vxh2a")]
+transform = Transform3D(-0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881907, -8.276358, -0.4381578, -3.0656862)
+
+[node name="racer_2" parent="." unique_id=673455713 instance=ExtResource("6_w7011")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.311405, -0.54249763, -0.14389873)
+
+[node name="racer_3" parent="." unique_id=2023862394 instance=ExtResource("7_f3sea")]
+transform = Transform3D(0.3882285, 0, 1.4488888, 0, 1.5, 0, -1.4488888, 0, 0.3882285, -6.172003, -0.5676527, 2.2409453)
+
+[node name="racer_4" parent="." unique_id=1593887414 instance=ExtResource("8_0acfw")]
+transform = Transform3D(-0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881907, -10.5439415, 0, -0.94359684)

@@ -28,18 +28,18 @@ var crash_clips:Array[AudioStream] = [
 	preload("res://assets/game/audio/sfx/edited/bonk6.wav")
 ]
 
-var track_tiles:Dictionary = {
-	"0000": preload("res://assets/game/scenes/road/road_0000.tscn"),
-	"0001": preload("res://assets/game/scenes/road/road_0001.tscn"),
-	"0010": preload("res://assets/game/scenes/road/road_0010.tscn"),
-	"0011": preload("res://assets/game/scenes/road/road_0011.tscn"),
-	"0100": preload("res://assets/game/scenes/road/road_0100.tscn"),
-	"0110": preload("res://assets/game/scenes/road/road_0110.tscn"),
-	"1000": preload("res://assets/game/scenes/road/road_1000.tscn"),
-	"1001": preload("res://assets/game/scenes/road/road_1001.tscn"),
-	"1100": preload("res://assets/game/scenes/road/road_1100.tscn")
+var flags:Array = [
+	preload("res://assets/system/menu/assets/ui/flags/flag1.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag2.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag3.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag4.png")
 	
-}
+]
+var tracks:Array = [
+	preload("res://assets/game/scenes/campaign_track_0.tscn"),
+	preload("res://assets/game/scenes/campaign_track_1.tscn")
+]
+var position_rewards:Array[int] = [5, 3, 1, 0, 0, 0, 0, 0]
 
 var DEFAULT_SAVE_DATA:Dictionary = {
 	"settings": {
@@ -52,14 +52,19 @@ var DEFAULT_SAVE_DATA:Dictionary = {
 			"volume": {
 				"Master": 90.0,
 				"UI": 90.0,
-				"Music": 90.0,
+				"Music": 20.0,
 				"SFX": 90.0,
 				"Voice": 90.0
 			}
 		}
 	},
 	"game": {
-		"started": false
+		"started": false,
+		"unlocked_characters": [true,true,false,false,false,false,false,false],
+		"racer": 0,
+		"track": 0,
+		"total_races": 0,
+		"score_history": []
 	}
 }
 var save_data:Dictionary = DEFAULT_SAVE_DATA.duplicate(true)

@@ -13,15 +13,15 @@ signal right
 
 @export_category("CPU")
 @export var path_follow: PathFollow3D
-# larger = smoother and better
+## larger = smoother and better
 @export var cpu_lookahead: float = 200.0
-# has to be above this angle (rad) to steer
+## has to be above this angle (rad) to steer
 @export var cpu_steer_deadzone: float = 0.05
-# if above this angle will full steer
+## if above this angle will full steer
 @export var cpu_full_steer_angle: float = 0.2
-# too sharp of a turn so brake
+## too sharp of a turn so brake
 @export var cpu_brake_angle: float = 0.3
-# boost on straight aways
+## boost on straight aways
 @export var cpu_boost_angle: float = 0.15
 var is_boosting: bool = false
 var boost_active: bool = false
@@ -53,8 +53,12 @@ var current_boost: float = 2.0
 @export var hover_range: float = 2.0
 @export var hover_stiffness: float = 0.5
 
+@export_category("Lap Progress")
+@export var current_checkpoint:int = -1
+@export var current_lap:int = 0
 
 @export_category("Debug")
+@export var disabled:bool = true
 @export var debug_text: RichTextLabel
 
 var jet_parts: Array[PodRacerJetPart] = []
@@ -63,8 +67,18 @@ var wall_normals: Array[Vector3] = []
 
 # Reference thrust jet, used to derive which way the pod actually faces.
 var accelerate_jet: PodRacerJetPart = null
-
+var difficulty_modifer:float = 1.0
+var is_journalist:bool = false
 func _ready() -> void:
+	difficulty_modifer = Global.save_data.get("settings", {}).get("toggles", {}).get("difficulty", 0)
+	if Global.save_data.get("game", {}).get("racer", 0) == portrait_id:
+		if difficulty_modifer > 0.0:
+			self.player_controlled = true
+		else:
+			self.is_journalist = true
+		
+		self.camera.current = true
+	
 	for jet_part in jets_node.get_children():
 		if jet_part.activation_key in ["Accelerate"]:
 			accelerate.connect(jet_part.activate_jet)
@@ -104,19 +118,28 @@ func _physics_process(delta: float) -> void:
 		_apply_player_controls(delta)
 	else:
 		_apply_cpu_controls(delta)
-
+	
 	for jet_part in jet_parts:
 		if jet_part.visible and jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
+			if disabled:
+				return
 			if abs(self.linear_velocity.length()) < max_velocity:
 				var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength
 				force.y = 0
+				if not player_controlled and not is_journalist:
+					# nerf less with higher difficulties
+					var modifier:float = 0.9-(0.4-(difficulty_modifer * 0.1))
+					force *= modifier
 				force = _slide_thrust(force)
 				self.apply_central_force(force)
 
 		elif jet_part.visible and jet_part.ray_cast.is_colliding():
 			var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength * max(0, (hover_stiffness * (hover_range - jet_part.collision_distance)))
 			self.apply_central_force(force)
-
+	if disabled:
+		self.linear_velocity.x = 0
+		self.linear_velocity.z = 0
+		
 	_apply_upright_torque()
 
 func _apply_upright_torque() -> void:
@@ -180,6 +203,9 @@ func _update_path_target() -> void:
 	path_follow.progress = closest_offset + cpu_lookahead
 
 func _apply_cpu_controls(delta: float) -> void:
+	if disabled:
+		return
+	
 	if path_follow == null:
 		return
 		
@@ -215,6 +241,7 @@ func _apply_cpu_controls(delta: float) -> void:
 		apply_torque(global_basis.y.normalized() * tilt_force * steer_strength * steer_dir)
 
 func _apply_player_controls(delta: float) -> void:
+	
 	if Input.is_action_just_pressed("Accelerate"):
 		accelerate.emit(true)
 	elif Input.is_action_just_released("Accelerate"):

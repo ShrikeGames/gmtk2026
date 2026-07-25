@@ -4,6 +4,7 @@ class_name MainMenu
 
 @export_category("Game")
 @export var game_scene:String = "res://assets/game/scenes/game.scn"
+@export var campaign_menu_scene:String = "res://assets/system/menu/scenes/campaign_menu.tscn"
 
 @export_category("Main Menu")
 @export var main_menu_container:CenterContainer
@@ -71,10 +72,10 @@ func _start_menu_button_pressed() -> void:
 	Global.save_data.set("game", Global.DEFAULT_SAVE_DATA.get("game"))
 	Global.save_data.get("game", Global.DEFAULT_SAVE_DATA.get("game")).set("started", true)
 	Global.save()
-	get_tree().change_scene_to_file(game_scene)
+	get_tree().change_scene_to_file(campaign_menu_scene)
 
 func _continue_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file(game_scene)
+	get_tree().change_scene_to_file(campaign_menu_scene)
 
 func _hide_all_menus():
 	main_menu_container.visible = false
