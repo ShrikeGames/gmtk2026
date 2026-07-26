@@ -658,7 +658,7 @@ character_id = 3
 
 [node name="SubViewportContainer5" type="SubViewportContainer" parent="CanvasLayer/character_portraits" unique_id=1417993701]
 offset_left = 68.0
-offset_top = 461.0
+offset_top = 458.0
 offset_right = 324.0
 offset_bottom = 717.0
 
