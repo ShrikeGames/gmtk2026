@@ -14,7 +14,7 @@ signal right
 @export_category("CPU")
 @export var path_follow: PathFollow3D
 ## larger = smoother and better
-@export var cpu_lookahead: float = 200.0
+@export var cpu_lookahead: float = 100.0
 ## has to be above this angle (rad) to steer
 @export var cpu_steer_deadzone: float = 0.05
 ## if above this angle will full steer
@@ -34,15 +34,19 @@ var cpu_right: bool = false
 
 @export_category("Parts")
 @export var jets_node: Node3D
-@export var portrait_id:int = 0
+@export var portrait_id: int = 0
 
 @export_category("Stats")
-@export var racer_name:String = "Echo"
+@export var racer_name: String = "Echo"
 @export var turn_force: float = 16.0
 @export var tilt_force: float = 16.0
 @export var max_velocity: float = 260.0
 @export var max_boost: float = 2.0
+@export var health: float = 100.0
+@export var max_health: float = 100.0
 var current_boost: float = 2.0
+var checkpoint_position: Vector3
+var checkpoint_rotation: Vector3
 
 @export_category("Jank")
 @export var upright_strength: float = 60.0
@@ -50,16 +54,25 @@ var current_boost: float = 2.0
 @export var slide_along_walls: bool = true
 
 @export_category("Hover")
-@export var hover_range: float = 2.0
-@export var hover_stiffness: float = 0.5
+@export var hover_range: float = 2.5
+@export var hover_stiffness: float = 0.75
 
 @export_category("Lap Progress")
-@export var current_checkpoint:int = -1
-@export var current_lap:int = 0
+@export var current_checkpoint: int = -1
+@export var current_lap: int = 0
 
 @export_category("Debug")
-@export var disabled:bool = true
+@export var disabled: bool = true
 @export var debug_text: RichTextLabel
+
+@export_category("Voice")
+@export var voice_player: AudioStreamPlayer3D
+@export var min_pitch: float = 0.9
+@export var max_pitch: float = 1.1
+@export var pitch_responsiveness: float = 6.0
+@export var clips_dict: Dictionary
+@export var last_position: int = portrait_id
+var can_play_voice_clip: bool = true
 
 var jet_parts: Array[PodRacerJetPart] = []
 var wall_normals: Array[Vector3] = []
@@ -67,9 +80,10 @@ var wall_normals: Array[Vector3] = []
 
 # Reference thrust jet, used to derive which way the pod actually faces.
 var accelerate_jet: PodRacerJetPart = null
-var difficulty_modifer:float = 1.0
-var is_journalist:bool = false
+var difficulty_modifer: float = 1.0
+var is_journalist: bool = false
 func _ready() -> void:
+	self.clips_dict = Global.voice_lines[portrait_id]
 	difficulty_modifer = Global.save_data.get("settings", {}).get("toggles", {}).get("difficulty", 0)
 	if Global.save_data.get("game", {}).get("racer", 0) == portrait_id:
 		if difficulty_modifer > 0.0:
@@ -89,8 +103,64 @@ func _ready() -> void:
 		elif jet_part.activation_key in ["Boost"]:
 			boost.connect(jet_part.activate_jet)
 		jet_parts.append(jet_part)
+	
+	if self.voice_player:
+		self.voice_player.finished.connect(_clip_finished)
+		self.crash.connect(_play_random_hit_voiceline)
+
+
+func _clip_finished() -> void:
+	can_play_voice_clip = true
+
+func _play_random_hit_voiceline() -> void:
+	if not can_play_voice_clip or not self.voice_player:
+		return
+	can_play_voice_clip = false
+	self.voice_player.stream = clips_dict.get("hit").pick_random()
+	var target_pitch: float = lerpf(min_pitch, max_pitch, get_velocity())
+	self.voice_player.pitch_scale = lerpf(self.voice_player.pitch_scale, target_pitch, min(1.0, pitch_responsiveness))
+	self.voice_player.play()
+
+func play_pass_voiceline() -> void:
+	if not can_play_voice_clip or not self.voice_player:
+		return
+	can_play_voice_clip = false
+	self.voice_player.stream = clips_dict.get("pass")
+	var target_pitch: float = lerpf(min_pitch, max_pitch, get_velocity())
+	self.voice_player.pitch_scale = lerpf(self.voice_player.pitch_scale, target_pitch, min(1.0, pitch_responsiveness))
+	self.voice_player.play()
+
+func play_upset_voiceline() -> void:
+	if not can_play_voice_clip or not self.voice_player:
+		return
+	can_play_voice_clip = false
+	self.voice_player.stream = clips_dict.get("upset")
+	var target_pitch: float = lerpf(min_pitch, max_pitch, get_velocity())
+	self.voice_player.pitch_scale = lerpf(self.voice_player.pitch_scale, target_pitch, min(1.0, pitch_responsiveness))
+	self.voice_player.play()
+
+func get_velocity() -> float:
+	var velocity: float = abs(self.linear_velocity.length())
+	if velocity < 0.1:
+		return 0.0
+	return clampf(velocity / self.max_velocity, 0.0, 1.0)
+
+func take_damage(damage: float):
+	#health = max(0, health-damage)
+	_play_random_hit_voiceline()
+	if health <= 0:
+		self._respawn()
+
+func _respawn():
+	print(self.racer_name, " respawned at ", checkpoint_position)
+	health = max_health
+	linear_velocity = Vector3.ZERO
+	self.global_position = checkpoint_position
+	self.global_rotation = checkpoint_rotation
 
 func _process(_delta: float) -> void:
+	if self.global_position.y <= -10:
+		_respawn()
 	if debug_text:
 		debug_text.text = "%s %s %s" % [self.linear_velocity, abs(self.linear_velocity.length()), self.current_boost]
 
@@ -127,8 +197,8 @@ func _physics_process(delta: float) -> void:
 				var force: Vector3 = jet_part.ray_cast.global_transform.basis.y.normalized() * jet_part.force_strength
 				force.y = 0
 				if not player_controlled and not is_journalist:
-					# nerf less with higher difficulties
-					var modifier:float = 0.9-(0.4-(difficulty_modifer * 0.1))
+					## nerf less with higher difficulties
+					var modifier: float = 0.9 - (0.4 - (difficulty_modifer * 0.1))
 					force *= modifier
 				force = _slide_thrust(force)
 				self.apply_central_force(force)
@@ -199,8 +269,11 @@ func _update_path_target() -> void:
 	var path: Path3D = path_follow.get_parent() as Path3D
 	if path == null or path.curve == null:
 		return
+	var path_scale: float = path.global_basis.get_scale().x
+	if path_scale <= 0.0001:
+		path_scale = 1.0
 	var closest_offset: float = path.curve.get_closest_offset(path.to_local(global_position))
-	path_follow.progress = closest_offset + cpu_lookahead
+	path_follow.progress = closest_offset + cpu_lookahead / path_scale
 
 func _apply_cpu_controls(delta: float) -> void:
 	if disabled:
@@ -241,7 +314,6 @@ func _apply_cpu_controls(delta: float) -> void:
 		apply_torque(global_basis.y.normalized() * tilt_force * steer_strength * steer_dir)
 
 func _apply_player_controls(delta: float) -> void:
-	
 	if Input.is_action_just_pressed("Accelerate"):
 		accelerate.emit(true)
 	elif Input.is_action_just_released("Accelerate"):

@@ -26,7 +26,6 @@ func _ready() -> void:
 	
 	exit_menu_button.pressed.connect(_exit_menu_button_pressed)
 	
-	
 
 func _start_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file(game_scene)
@@ -35,8 +34,8 @@ func _return_to_menu_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file(main_menu_scene)
 
 func _challenge_champion_menu_button_pressed() -> void:
-	# TODO
-	return
+	Global.save_data.get("game", {}).set("track", 3)
+	get_tree().change_scene_to_file(game_scene)
 
 func _hide_all_menus():
 	main_menu_container.visible = false

@@ -16,7 +16,12 @@ func _ready() -> void:
 	track_resource.portraits_node = portraits_node
 	track_resource.speed_hud = speed_hud
 	self.add_child(track_resource)
-	pod_racers_node.global_position = track_resource.player_spawn_location.global_position
+	pod_racers_node.global_position = track_resource.player_spawn_location.global_position + Vector3(0,3,0)
+	pod_racers_node.global_rotation = track_resource.player_spawn_location.global_rotation
+	for pod_racer in pod_racers_node.get_children():
+		pod_racer.checkpoint_position = pod_racers_node.global_position + Vector3(0,3,0)
+		pod_racer.checkpoint_rotation = pod_racer.global_rotation
+	
 	flags_node.set_checkpoint_manager(track_resource.checkpoint_manager)
 	
 	for pod_racer in pod_racers_node.get_children():

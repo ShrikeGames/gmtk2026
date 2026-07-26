@@ -1,8 +1,8 @@
 extends Node
 
 var save_file_location: String = "user://save_data_v1.json"
-var CHEVRON_LEFT:String = "⟪"
-var CHEVRON_RIGHT:String = "⟫"
+var CHEVRON_LEFT:String = "{{"
+var CHEVRON_RIGHT:String = "}}"
 
 var engine_clips:Array[AudioStream] = [
 	preload("res://assets/game/audio/sfx/edited/pod_racer_engine_1.wav"),
@@ -32,13 +32,119 @@ var flags:Array = [
 	preload("res://assets/system/menu/assets/ui/flags/flag1.png"),
 	preload("res://assets/system/menu/assets/ui/flags/flag2.png"),
 	preload("res://assets/system/menu/assets/ui/flags/flag3.png"),
-	preload("res://assets/system/menu/assets/ui/flags/flag4.png")
+	preload("res://assets/system/menu/assets/ui/flags/flag4.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag5.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag6.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag7.png"),
+	preload("res://assets/system/menu/assets/ui/flags/flag8.png")
 	
 ]
 var tracks:Array = [
 	preload("res://assets/game/scenes/campaign_track_0.tscn"),
-	preload("res://assets/game/scenes/campaign_track_1.tscn")
+	preload("res://assets/game/scenes/campaign_track_1.tscn"),
+	preload("res://assets/game/scenes/campaign_track_2.tscn"),
+	preload("res://assets/game/scenes/campaign_track_3.tscn")
 ]
+var days_voicelines:Array = [
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day1.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day2.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day3.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day4.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day5.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day6.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day7.wav"),
+	preload("res://assets/game/audio/sfx/edited/voices/narrator_day8.wav")
+]
+var voice_lines:Array[Dictionary] = [
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_1_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_1_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_1_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_1_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_1_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_1_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_2_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_2_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_2_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_2_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_2_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_2_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_3_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_3_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_3_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_3_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_3_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_3_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_4_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_4_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_4_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_4_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_4_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_4_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_5_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_5_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_5_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_5_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_5_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_5_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_6_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_6_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_6_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_6_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_6_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_6_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_7_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_7_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_7_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_7_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_7_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_7_hit4.wav")
+		]
+	},
+	{
+		"pass": preload("res://assets/game/audio/sfx/edited/voices/racer_8_pass.wav"),
+		"upset": preload("res://assets/game/audio/sfx/edited/voices/racer_8_upset.wav"),
+		"hit": [
+			preload("res://assets/game/audio/sfx/edited/voices/racer_8_hit1.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_8_hit2.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_8_hit3.wav"),
+			preload("res://assets/game/audio/sfx/edited/voices/racer_8_hit4.wav")
+		]
+	}
+]
+
+var character_unlocks_per_track_win:Array[Array]= [
+	[2],
+	[3,4],
+	[5,6],
+	[7]
+]
+
 var position_rewards:Array[int] = [5, 3, 1, 0, 0, 0, 0, 0]
 
 var DEFAULT_SAVE_DATA:Dictionary = {

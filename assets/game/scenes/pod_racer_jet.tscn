@@ -14,3 +14,5 @@ collision_mask = 2
 
 [node name="pod_jet_1" parent="." unique_id=755423045 instance=ExtResource("2_t7n2m")]
 transform = Transform3D(0.09999999, 0, 0, 0, 0.09999998, 0, 0, 0, 0.09999998, 0, -0.034864485, 0)
+
+[connection signal="ready" from="." to="." method="_on_ready"]

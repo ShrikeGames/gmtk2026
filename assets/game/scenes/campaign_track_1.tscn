@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://nebx46wdaf20"]
 
 [ext_resource type="Script" uid="uid://csrbnf7i07als" path="res://assets/game/scripts/track_generator.gd" id="1_8ou0w"]
+[ext_resource type="PackedScene" uid="uid://cddtodaby5mrj" path="res://assets/game/models/not_rigged/arrow.blend" id="2_ottpy"]
 [ext_resource type="Texture2D" uid="uid://d65wy6evk54f" path="res://assets/game/models/not_rigged/textures/racer4.png" id="2_q05ym"]
 [ext_resource type="Script" uid="uid://dpuptmkge3mlr" path="res://assets/game/scripts/checkpoints_manager.gd" id="3_q05ym"]
 [ext_resource type="PackedScene" uid="uid://4aucgvdyyt3r" path="res://assets/game/scenes/checkpoint.tscn" id="4_ottpy"]
@@ -64,35 +65,38 @@ checkpoint_manager = NodePath("checkpoint_manager")
 player_spawn_location = NodePath("player_spawn_location")
 
 [node name="player_spawn_location" type="Node3D" parent="." unique_id=258054741]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1670742, 1.0652591, -0.69064105)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1670742, 0.9725944, -0.69064105)
+
+[node name="arrow" parent="player_spawn_location" unique_id=1799785264 instance=ExtResource("2_ottpy")]
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0, 0, 0)
 
 [node name="track_guide_nodes" type="Node3D" parent="." unique_id=1398242835]
 transform = Transform3D(3.2783547e-09, 0, -0.025, 0, 0.025, 0, 0.025, 0, 3.2783547e-09, 0, 0, 0)
 
 [node name="SlowerPath" type="Path3D" parent="track_guide_nodes" unique_id=1790662730]
-transform = Transform3D(0.9999989, 0.0014708313, -0.00021298858, -0.0014705803, 0.9999982, 0.0011877777, 0.00021471453, -0.0011874669, 0.9999993, 361.8204, 0.45781326, -36.20727)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 361.8204, 0.45781326, -36.20727)
 curve = SubResource("Curve3D_idx2d")
 
 [node name="SlowerPathFollow" type="PathFollow3D" parent="track_guide_nodes/SlowerPath" unique_id=1777744588]
-transform = Transform3D(-0.1267961, -0.0117025385, 0.99183, 0, 0.999908, 0.011797682, -0.9918999, 0.0014959536, -0.12678717, -650.7298, 45.38084, -9.044647)
+transform = Transform3D(0.99997133, 0, 0, 0, 0.9999776, 0, 0, 0, 0.99996966, -650.7298, 45.38084, -9.044647)
 
 [node name="checkpoint_manager" type="Node3D" parent="." unique_id=734765805]
 transform = Transform3D(6.5567094e-09, 0, -0.05, 0, 0.05, 0, 0.05, 0, 6.5567094e-09, 0, -3.6877916, 0)
 script = ExtResource("3_q05ym")
 
 [node name="checkpoint0" parent="checkpoint_manager" unique_id=2006814419 instance=ExtResource("4_ottpy")]
-transform = Transform3D(0.026276387, 0, 0.9925036, 0, 1, 0, -0.21338828, 0, 0.122215755, -107.67661, 107.87268, -0.47582132)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -107.67661, 94.18907, -0.47582132)
 
 [node name="checkpoint1" parent="checkpoint_manager" unique_id=2101013235 instance=ExtResource("4_ottpy")]
-transform = Transform3D(-0.17, 0, -1.5099579e-07, 0, 1, 0, 2.5669285e-08, 0, -1, -397.59372, 107.87268, 96.143425)
+transform = Transform3D(0.008726561, 0, -0.9999619, 0, 1, 0, 0.9999619, 0, 0.008726561, -397.59372, 94.10269, 96.143425)
 id = 1
 
 [node name="checkpoint2" parent="checkpoint_manager" unique_id=219912018 instance=ExtResource("4_ottpy")]
-transform = Transform3D(-9.616506e-09, 0, 1, 0, 1, 0, -0.22, 0, -4.371139e-08, -93.76464, 117.48447, 187.68304)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.165, -105.26464, 114.55129, 190.38844)
 id = 2
 
 [node name="checkpoint3" parent="checkpoint_manager" unique_id=1916134578 instance=ExtResource("4_ottpy")]
-transform = Transform3D(-0.255, 0, -1.5099579e-07, 0, 1, 0, 3.850393e-08, 0, -1, 243.31273, 107.87268, 112.24578)
+transform = Transform3D(-0.70710677, 0, 0.8308504, 0, 1, 0, -0.70710677, 0, -0.8308504, 259.31274, 95.37266, 114.24578)
 id = 3
 
 [node name="campaign_track1_new" type="Node3D" parent="." unique_id=39417302]

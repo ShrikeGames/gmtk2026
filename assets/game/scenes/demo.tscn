@@ -8,14 +8,20 @@
 [ext_resource type="PackedScene" uid="uid://b727ruhuoyw78" path="res://assets/game/models/not_rigged/racer_2.blend" id="6_w7011"]
 [ext_resource type="PackedScene" uid="uid://dlvxyby08isq6" path="res://assets/game/models/not_rigged/racer_3.blend" id="7_f3sea"]
 [ext_resource type="PackedScene" uid="uid://yx7o4lkq8mnv" path="res://assets/game/models/not_rigged/racer_4.blend" id="8_0acfw"]
+[ext_resource type="PackedScene" uid="uid://c7rqp5xjuca6y" path="res://assets/game/models/not_rigged/pod_racer_5.blend" id="9_f3sea"]
+[ext_resource type="PackedScene" uid="uid://bt4ntpr04ye3x" path="res://assets/game/models/not_rigged/pod_racer_6.blend" id="10_0acfw"]
+[ext_resource type="PackedScene" uid="uid://dh8c2qksn17sj" path="res://assets/game/models/not_rigged/pod_racer_7.blend" id="11_dalhf"]
+[ext_resource type="PackedScene" uid="uid://ck5f38nem4od7" path="res://assets/game/models/not_rigged/racer_5.blend" id="12_enl1b"]
+[ext_resource type="PackedScene" uid="uid://cus2xxgy3yd2o" path="res://assets/game/models/not_rigged/racer_6.blend" id="13_2jdl6"]
+[ext_resource type="PackedScene" uid="uid://dmv17y6gsdrjq" path="res://assets/game/models/not_rigged/racer_7.blend" id="14_o2b87"]
 
 [node name="Demo" type="Node3D" unique_id=1536115616]
 
 [node name="pod_racer_1" parent="." unique_id=224688751 instance=ExtResource("1_qy6y7")]
-transform = Transform3D(2.1073424e-08, -0.70710677, 0.70710677, 1, 2.9802322e-08, 0, -2.1073424e-08, 0.70710677, 0.70710677, 0.27125907, -0.021275043, -7.0218444)
+transform = Transform3D(2.1073424e-08, -0.70710677, 0.70710677, 1, 2.9802322e-08, 0, -2.1073424e-08, 0.70710677, 0.70710677, 0.27125907, -0.021275043, -7.324957)
 
 [node name="pod_racer_2" parent="." unique_id=2028616544 instance=ExtResource("2_a37ov")]
-transform = Transform3D(2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0, 1, 0.27125907, -0.021275043, -0.10015607)
+transform = Transform3D(2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0, 1, 0.27125907, -0.021275043, -0.30353236)
 
 [node name="pod_racer_3" parent="." unique_id=2050965239 instance=ExtResource("3_esukd")]
 transform = Transform3D(1.490116e-08, -0.49999997, -0.86602545, 1, 2.9802322e-08, 0, 2.580957e-08, -0.86602545, 0.49999997, -2.1392624, -0.021275043, 5.128842)
@@ -30,7 +36,28 @@ transform = Transform3D(-0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.311405, -0.54249763, -0.14389873)
 
 [node name="racer_3" parent="." unique_id=2023862394 instance=ExtResource("7_f3sea")]
-transform = Transform3D(0.3882285, 0, 1.4488888, 0, 1.5, 0, -1.4488888, 0, 0.3882285, -6.172003, -0.5676527, 2.2409453)
+transform = Transform3D(-0.38822863, 0, 1.4488885, 0, 1.4999999, 0, -1.4488885, 0, -0.38822863, -5.5967593, -0.5676527, 2.9150615)
 
 [node name="racer_4" parent="." unique_id=1593887414 instance=ExtResource("8_0acfw")]
 transform = Transform3D(-0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881907, -10.5439415, 0, -0.94359684)
+
+[node name="pod_racer_5" parent="." unique_id=891049966 instance=ExtResource("9_f3sea")]
+transform = Transform3D(-5.9604645e-08, -1, 4.371139e-08, -1.7763566e-15, -4.3711385e-08, -1, 1, -5.9604645e-08, 1.7763568e-15, -25.333376, 1.8604393, -3.3888092)
+
+[node name="pod_racer_6" parent="." unique_id=804803707 instance=ExtResource("10_0acfw")]
+transform = Transform3D(1.0000001, -1.4901161e-08, 2.2351742e-08, -3.8567047e-09, 0.2588191, -0.96592593, 0, 0.96592593, 0.2588191, -13.770893, 0, 9.137971)
+
+[node name="pod_racer_7" parent="." unique_id=1175205212 instance=ExtResource("11_dalhf")]
+transform = Transform3D(0.8926331, 0, -0.45078406, 0, 1, 0, 0.45078406, 0, 0.8926331, -12.207745, 4.7683716e-07, -14.087009)
+
+[node name="racer_5" parent="." unique_id=1788393298 instance=ExtResource("12_enl1b")]
+transform = Transform3D(-0.20931135, 0, 0.97784907, 0, 1, 0, -0.97784907, 0, -0.20931135, -12.178184, 0, -3.8655477)
+
+[node name="racer_6" parent="." unique_id=1175965252 instance=ExtResource("13_2jdl6")]
+transform = Transform3D(-0.1906198, -0.08355609, 0.97810143, -0.01598334, 0.99650306, 0.08201313, -0.9815338, 0, -0.19128872, -9.044156, -1.8348031, 2.3728218)
+
+[node name="racer_7" parent="." unique_id=1269145620 instance=ExtResource("14_o2b87")]
+transform = Transform3D(-0.2193354, 0, 0.9756495, 0, 1, 0, -0.9756495, 0, -0.2193354, -12.614325, -0.78380156, -7.1126328)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1519332058]
+transform = Transform3D(-0.3746066, 0, 0.92718387, 0, 1, 0, -0.92718387, 0, -0.3746066, 0, 0, 0)

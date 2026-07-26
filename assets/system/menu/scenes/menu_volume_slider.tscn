@@ -16,7 +16,7 @@ audio_stream_player = NodePath("ButtonAudioPlayer")
 chevrons = NodePath("Chevrons")
 
 [node name="Chevrons" type="Node2D" parent="." unique_id=1621604780]
-visible = false
+position = Vector2(0, -7)
 
 [node name="Chevron" type="RichTextLabel" parent="Chevrons" unique_id=1922079124]
 custom_minimum_size = Vector2(50, 50)
@@ -25,7 +25,7 @@ offset_top = 8.0
 offset_right = 18.0
 offset_bottom = 64.0
 theme = ExtResource("1_i01w0")
-text = "⟪"
+text = "{{"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -33,12 +33,12 @@ horizontal_alignment = 2
 
 [node name="Chevron2" type="RichTextLabel" parent="Chevrons" unique_id=570382908]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 736.0
+offset_left = 713.0
 offset_top = 8.0
-offset_right = 800.0
+offset_right = 777.0
 offset_bottom = 64.0
 theme = ExtResource("1_i01w0")
-text = "⟫"
+text = "}}"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false

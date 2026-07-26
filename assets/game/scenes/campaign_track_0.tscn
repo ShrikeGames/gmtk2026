@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csrbnf7i07als" path="res://assets/game/scripts/track_generator.gd" id="1_40dvf"]
 [ext_resource type="PackedScene" uid="uid://dhbkh02b4quq4" path="res://assets/game/models/not_rigged/campaign_track_0.blend" id="2_4tfvm"]
+[ext_resource type="PackedScene" uid="uid://cddtodaby5mrj" path="res://assets/game/models/not_rigged/arrow.blend" id="2_v8rwi"]
 [ext_resource type="Script" uid="uid://dpuptmkge3mlr" path="res://assets/game/scripts/checkpoints_manager.gd" id="3_es8jt"]
 [ext_resource type="PhysicsMaterial" uid="uid://e8pobs7qydlg" path="res://assets/game/models/physics_material.tres" id="3_eubi2"]
 [ext_resource type="PackedScene" uid="uid://4aucgvdyyt3r" path="res://assets/game/scenes/checkpoint.tscn" id="4_eubi2"]
@@ -9,18 +10,18 @@
 [sub_resource type="Curve3D" id="Curve3D_idx2d"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -35.902893, 11.861687, -323.5543, 0, 0, 0, 0, 0, 0, -205.81769, -0.018009186, -493.7581, 0, 0, 0, 0, 0, 0, -508.13043, 5.105728, -493.28555, 0, 0, 0, 0, 0, 0, -791.65845, 9.045845, -245.6709, 0, 0, 0, 0, 0, 0, -819.5342, 3.9988403, 28.21608, 0, 0, 0, 0, 0, 0, -604.1681, 3.1820831, 487.78223, 0, 0, 0, 0, 0, 0, -253.0482, 3.5623398, 602.366, 0, 0, 0, 0, 0, 0, -60.375, 4.1268845, 365.60452),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -22.459167, 0.2660675, -251.81192, 0, 0, 0, 0, 0, 0, -93.612976, 0.39688873, -450.04654, 0, 0, 0, 0, 0, 0, -225.07869, 0.30078888, -531.9043, 0, 0, 0, 0, 0, 0, -403.93906, 0.063308716, -553.4151, 0, 0, 0, 0, 0, 0, -563.3915, -0.2224083, -510.28348, 0, 0, 0, 0, 0, 0, -645.2532, -0.4759102, -398.21173, 0, 0, 0, 0, 0, 0, -709.86053, -0.7884941, -215.03241, 0, 0, 0, 0, 0, 0, -714.12634, -1.0379257, -10.317066, 0, 0, 0, 0, 0, 0, -720.5238, -1.4184723, 302.1432, 0, 0, 0, 0, 0, 0, -653.6835, -1.5351601, 483.1396, 0, 0, 0, 0, 0, 0, -522.2108, -1.4774361, 597.3207, 0, 0, 0, 0, 0, 0, -339.0393, -1.2412987, 625.2952, 0, 0, 0, 0, 0, 0, -173.12407, -0.9358368, 573.5426, 0, 0, 0, 0, 0, 0, -67.55676, -0.6577072, 470.0855, 0, 0, 0, 0, 0, 0, -9.407562, -0.39044952, 317.07602),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 9
+point_count = 15
 
 [sub_resource type="Curve3D" id="Curve3D_5wv75"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -27.735474, 0.14552689, -156.85864, 0, 0, 0, 0, 0, 0, -132.27725, 6.153763, -403.7622, 0, 0, 0, 0, 0, 0, -337.5031, 11.513107, -492.56192, 0, 0, 0, 0, 0, 0, -606.335, -0.052280426, -371.32535, 0, 0, 0, 0, 0, 0, -636.12366, 0.32593155, 43.88991, 0, 0, 0, 0, 0, 0, -639.0536, 2.1888046, 382.8224, 0, 0, 0, 0, 0, 0, -321.8252, -1.8018494, 525.698, 0, 0, 0, 0, 0, 0, -130.59503, -1.5687561, 416.56796, 0, 0, 0, 0, 0, 0, -17.453186, 31.911308, 268.10123),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.739563, 26.617157, -199.2507, 0, 0, 0, 0, 0, 0, -137.74832, 56.24254, -422.23898, 0, 0, 0, 0, 0, 0, -280.20587, 64.78487, -487.6807, 0, 0, 0, 0, 0, 0, -422.64383, 67.03681, -506.06387, 0, 0, 0, 0, 0, 0, -585.68176, 55.583824, -422.14218, 0, 0, 0, 0, 0, 0, -651.6858, 39.07717, -299.36707, 0, 0, 0, 0, 0, 0, -653.6554, 8.443024, -70.213196, 0, 0, 0, 0, 0, 0, -682.4175, -35.905228, 261.24716, 0, 0, 0, 0, 0, 0, -620.40857, -62.616318, 461.74292, 0, 0, 0, 0, 0, 0, -455.2254, -77.4155, 574.23804, 0, 0, 0, 0, 0, 0, -242.61105, -77.376205, 576.23816, 0, 0, 0, 0, 0, 0, -106.41466, -63.77461, 475.95404, 0, 0, 0, 0, 0, 0, -40.428467, -41.52455, 310.21277, 0, 0, 0, 0, 0, 0, -36.40979, -5.964546, 44.23027),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 9
+point_count = 14
 
 [node name="track_pieces" type="Node3D" unique_id=1252726943 node_paths=PackedStringArray("paths", "checkpoint_manager", "player_spawn_location")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
@@ -30,11 +31,14 @@ checkpoint_manager = NodePath("checkpoint_manager")
 player_spawn_location = NodePath("player_spawn_location")
 
 [node name="player_spawn_location" type="Node3D" parent="." unique_id=518986189]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.798591, 1.6179234, 2.0837944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.798591, 1.4713103, 2.0837944)
 
-[node name="campaign_track_0" parent="." unique_id=1690471090 instance=ExtResource("2_4tfvm")]
+[node name="arrow" parent="player_spawn_location" unique_id=1799785264 instance=ExtResource("2_v8rwi")]
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0, 0, 0)
 
-[node name="StaticBody3D" parent="campaign_track_0/track_0" parent_id_path=PackedInt32Array(1690471090, 885954280) index="0" unique_id=1261244934]
+[node name="campaign_track_0" parent="." unique_id=139785281 instance=ExtResource("2_4tfvm")]
+
+[node name="StaticBody3D" parent="campaign_track_0/track_0" parent_id_path=PackedInt32Array(139785281, 1002986139) index="0" unique_id=1020337637]
 collision_layer = 3
 collision_mask = 3
 physics_material_override = ExtResource("3_eubi2")
@@ -43,36 +47,36 @@ physics_material_override = ExtResource("3_eubi2")
 transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
 
 [node name="SlowerPath" type="Path3D" parent="track_guide_nodes" unique_id=1790662730]
-transform = Transform3D(0.9999989, 0.0014708313, -0.00021298858, -0.0014705803, 0.9999982, 0.0011877777, 0.00021471453, -0.0011874669, 0.9999993, 361.8204, 61.57849, -36.20727)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 361.8204, 61.57849, -36.20727)
 curve = SubResource("Curve3D_idx2d")
 
 [node name="SlowerPathFollow" type="PathFollow3D" parent="track_guide_nodes/SlowerPath" unique_id=1777744588]
-transform = Transform3D(0.9938738, 0.0040158345, 0.110211864, 6.9847367e-10, 0.9993303, -0.036412068, -0.11028427, 0.036190413, 0.9932212, 0, 0, 0)
+transform = Transform3D(0.9999703, 0, 0, 0, 0.99998844, 0, 0, 0, 0.9999727, -22.459167, 0.2660675, -251.81192)
 
 [node name="FastPath" type="Path3D" parent="track_guide_nodes" unique_id=700553880]
 transform = Transform3D(0.9999989, 0.0014708313, -0.00021298858, -0.0014705803, 0.9999982, 0.0011877777, 0.00021471453, -0.0011874669, 0.9999993, 361.8204, 61.57849, -36.20727)
 curve = SubResource("Curve3D_5wv75")
 
 [node name="FastPathFollow" type="PathFollow3D" parent="track_guide_nodes/FastPath" unique_id=1895593748]
-transform = Transform3D(0.92083454, 0.008733912, 0.38979435, 0, 0.99963725, -0.022402301, -0.3898919, 0.020627482, 0.92060417, -27.735474, 0.14552689, -156.85864)
+transform = Transform3D(0.99997526, 0, 0, 0, 0.99988735, 0, 0, 0, 0.9999755, -11.739563, 26.617157, -199.2507)
 
 [node name="checkpoint_manager" type="Node3D" parent="." unique_id=1932657224]
 transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
 script = ExtResource("3_es8jt")
 
 [node name="checkpoint0" parent="checkpoint_manager" unique_id=2006814419 instance=ExtResource("4_eubi2")]
-transform = Transform3D(0.99601775, 0, -0.08915503, 0, 1, 0, 0.08915503, 0, 0.99601775, 371.84634, 107.87268, -35.3891)
+transform = Transform3D(-4.371139e-08, 0, 2.845, 0, 1, 0, -1, 0, -1.243589e-07, 371.84634, 62.015472, -35.3891)
 
 [node name="checkpoint1" parent="checkpoint_manager" unique_id=1206439938 instance=ExtResource("4_eubi2")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.014038, 107.87268, -588.5852)
+transform = Transform3D(-1, 0, -9.029549e-07, 0, 1, 0, 1.509958e-07, 0, -5.98, -11.014038, 99.62508, -588.5852)
 id = 1
 
 [node name="checkpoint2" parent="checkpoint_manager" unique_id=375624772 instance=ExtResource("4_eubi2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -473.51953, 107.87268, -54.02539)
+transform = Transform3D(-4.371139e-08, 0, -3.535, 0, 1, 0, 1, 0, -1.5451977e-07, -351.07242, 91.46696, -9.712135)
 id = 2
 
 [node name="checkpoint3" parent="checkpoint_manager" unique_id=1543591064 instance=ExtResource("4_eubi2")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.014038, 107.87268, 623.5051)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7.22, -11.014038, 110.32272, 623.5051)
 id = 3
 
 [editable path="campaign_track_0"]

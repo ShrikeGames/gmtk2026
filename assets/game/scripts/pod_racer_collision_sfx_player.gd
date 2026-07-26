@@ -30,6 +30,7 @@ func _play_random_clip() -> void:
 	var target_pitch:float = lerpf(min_pitch, max_pitch, _get_velocity())
 	self.pitch_scale = lerpf(self.pitch_scale, target_pitch, min(1.0, pitch_responsiveness))
 	self.play()
+	pod_racer.take_damage(10)
 
 func _get_velocity() -> float:
 	var velocity:float = abs(pod_racer.linear_velocity.length())

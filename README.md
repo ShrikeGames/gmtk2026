@@ -113,6 +113,8 @@ https://github.com/user-attachments/assets/31b38d39-2740-4789-aa8c-1bab09353a00
 - [DONE] Create scenes for picking racer and track
 - [DONE] Start on CPU racer AI
 - [DONE] Make up to 4 racers
+- [DONE] Make second track
+- [DONE] Update loading of game scene to support multiple tracks, etc
 
 # DAY 4 (Saturday)
 
@@ -129,13 +131,17 @@ Racer 1 Velocity 速度
 Racer 2 Justice 正義
 Racer 3 Boundary Line 境界線
 Racer 4 Shrike 大百舌
-Racer 5 Sakura 桜
-Racer 6 Rich 富裕
+Racer 5 Lady お嬢様
+Racer 6 Sakura 桜
 Racer 7 Sheep 羊
-Racer 8 NoiR のわ子
+Racer 8 Nowako のわ子
 
 Playtest URL:
 https://shrikegames.itch.io/resonance-racer?secret=bI1pjxFmEdsCcLGqyJa2j4UsOIY
+
+
+- Podium screen on the campaign menu when it loads in showign the last top 3
+- 
 
 # Day 5 (Sunday until 2pm)
 
