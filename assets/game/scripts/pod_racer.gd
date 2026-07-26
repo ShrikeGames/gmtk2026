@@ -10,6 +10,7 @@ signal right
 @export_category("Controls")
 @export var player_controlled: bool = false
 @export var camera: Camera3D
+@export var demo:bool = false
 
 @export_category("CPU")
 @export var path_follow: PathFollow3D
@@ -36,6 +37,7 @@ var cpu_right: bool = false
 @export var jets_node: Node3D
 @export var portrait_id: int = 0
 
+
 @export_category("Stats")
 @export var racer_name: String = "Echo"
 @export var turn_force: float = 16.0
@@ -56,6 +58,12 @@ var checkpoint_rotation: Vector3
 @export_category("Hover")
 @export var hover_range: float = 2.5
 @export var hover_stiffness: float = 0.75
+
+@export_category("CPU Respawn")
+@export var respawn_flip_time: float = 1.5
+@export var respawn_upright_dot: float = 0.2
+@export var respawn_stuck_time: float = 3.0
+@export var respawn_min_distance: float = 10.0
 
 @export_category("Lap Progress")
 @export var current_checkpoint: int = -1
@@ -82,16 +90,27 @@ var wall_normals: Array[Vector3] = []
 var accelerate_jet: PodRacerJetPart = null
 var difficulty_modifer: float = 1.0
 var is_journalist: bool = false
+
+var _flip_timer: float = 0.0
+var _stuck_timer: float = 0.0
+var _stuck_check_position: Vector3 = Vector3.ZERO
+# Progress measured ALONG the path, so "moving but not advancing" still counts
+# as stuck. -1 means "reseed on the next valid frame".
+var _last_path_offset: float = -1.0
+var _window_progress: float = 0.0
 func _ready() -> void:
 	self.clips_dict = Global.voice_lines[portrait_id]
 	difficulty_modifer = Global.save_data.get("settings", {}).get("toggles", {}).get("difficulty", 0)
-	if Global.save_data.get("game", {}).get("racer", 0) == portrait_id:
-		if difficulty_modifer > 0.0:
-			self.player_controlled = true
-		else:
-			self.is_journalist = true
-		
-		self.camera.current = true
+	if demo:
+		self.camera.current = false
+	else:
+		if Global.save_data.get("game", {}).get("racer", 0) == portrait_id:
+			if difficulty_modifer > 0.0:
+				self.player_controlled = true
+			else:
+				self.is_journalist = true
+			
+			self.camera.current = true
 	
 	for jet_part in jets_node.get_children():
 		if jet_part.activation_key in ["Accelerate"]:
@@ -155,8 +174,82 @@ func _respawn():
 	print(self.racer_name, " respawned at ", checkpoint_position)
 	health = max_health
 	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
 	self.global_position = checkpoint_position
 	self.global_rotation = checkpoint_rotation
+	_reset_stuck_watchdog()
+
+# Clears the flip/stuck timers. -1 makes the path offset reseed next frame so a
+# teleport jump is never mistaken for progress.
+func _reset_stuck_watchdog() -> void:
+	_flip_timer = 0.0
+	_stuck_timer = 0.0
+	_window_progress = 0.0
+	_last_path_offset = -1.0
+	_stuck_check_position = global_position
+
+# The pod's own distance along the guide curve, in the curve's local units.
+# Returns -1 when there's no usable path.
+func _get_path_offset() -> float:
+	if path_follow == null:
+		return -1.0
+	var path: Path3D = path_follow.get_parent() as Path3D
+	if path == null or path.curve == null:
+		return -1.0
+	return path.curve.get_closest_offset(path.to_local(global_position))
+
+func _check_cpu_respawn(delta: float) -> void:
+	if player_controlled:
+		return
+	if disabled:
+		_reset_stuck_watchdog()
+		return
+
+	# Flipped: up axis pointing sideways/down for too long.
+	var up_dot: float = (global_basis * local_up_axis).normalized().dot(Vector3.UP)
+	if up_dot < respawn_upright_dot:
+		_flip_timer += delta
+		if _flip_timer >= respawn_flip_time:
+			_respawn()
+			return
+	else:
+		_flip_timer = 0.0
+
+	# Stuck: accumulate progress ALONG the path so grinding a wall / circling /
+	# reversing all register as no progress, not just sitting still.
+	_stuck_timer += delta
+	var offset: float = _get_path_offset()
+	if offset >= 0.0:
+		var path: Path3D = path_follow.get_parent() as Path3D
+		var length: float = path.curve.get_baked_length()
+		var path_scale: float = path.global_basis.get_scale().x
+		if path_scale <= 0.0001:
+			path_scale = 1.0
+		if _last_path_offset < 0.0:
+			_last_path_offset = offset  # first valid frame: just seed, no delta
+		var d: float = offset - _last_path_offset
+		# Unwrap the loop seam so crossing the start line reads as forward motion.
+		if d < -length * 0.5:
+			d += length
+		elif d > length * 0.5:
+			d -= length
+		_window_progress += d * path_scale  # convert to world distance
+		_last_path_offset = offset
+
+		if _stuck_timer >= respawn_stuck_time:
+			if _window_progress < respawn_min_distance:
+				_respawn()
+				return
+			_window_progress = 0.0
+			_stuck_timer = 0.0
+	else:
+		# No path: fall back to straight-line world displacement.
+		if _stuck_timer >= respawn_stuck_time:
+			if global_position.distance_to(_stuck_check_position) < respawn_min_distance:
+				_respawn()
+				return
+			_stuck_check_position = global_position
+			_stuck_timer = 0.0
 
 func _process(_delta: float) -> void:
 	if self.global_position.y <= -10:
@@ -188,7 +281,8 @@ func _physics_process(delta: float) -> void:
 		_apply_player_controls(delta)
 	else:
 		_apply_cpu_controls(delta)
-	
+		_check_cpu_respawn(delta)
+
 	for jet_part in jet_parts:
 		if jet_part.visible and jet_part.activation_key in ["Accelerate", "Brake", "Boost"]:
 			if disabled:

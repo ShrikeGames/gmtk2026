@@ -26,4 +26,6 @@ func _ready() -> void:
 	
 	for pod_racer in pod_racers_node.get_children():
 		pod_racer.path_follow = track_resource.paths.pick_random()
-	
+		var unlocked_characters:Array = Global.save_data.get("game", {}).get("unlocked_characters", [true,true,false,false,false,false,false,false])
+		if not unlocked_characters[pod_racer.portrait_id] and not pod_racer.portrait_id in Global.character_unlocks_per_track_win[Global.save_data.get("game",{}).get("track", 0)]:
+			pod_racer.get_parent().remove_child(pod_racer)

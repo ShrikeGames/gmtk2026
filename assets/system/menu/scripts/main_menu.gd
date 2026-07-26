@@ -1,16 +1,19 @@
-extends Node2D
+extends Node3D
 
 class_name MainMenu
 
 @export_category("Game")
 @export var game_scene:String = "res://assets/game/scenes/game.scn"
 @export var campaign_menu_scene:String = "res://assets/system/menu/scenes/campaign_menu.tscn"
+@export var demo_node:Node3D
+@export var camera:Camera3D
 
 @export_category("Main Menu")
 @export var main_menu_container:CenterContainer
 @export var continue_menu_button:MainMenuButton
 @export var start_menu_button:MainMenuButton
 @export var options_menu_button:MainMenuButton
+@export var how_to_play_menu_button:MainMenuButton
 @export var credits_button:MainMenuButton
 @export var exit_menu_button:MainMenuButton
 
@@ -24,6 +27,11 @@ class_name MainMenu
 @export_category("Game Options Menu")
 @export var game_options_menu_container:CenterContainer
 @export var back_game_options_menu_button:MainMenuButton
+
+@export_category("How To Play Menu")
+@export var how_to_play_menu_container:CenterContainer
+@export var back_how_to_play_menu_button:MainMenuButton
+
 
 @export_category("Audio Options Menu")
 @export var audio_options_menu_container:CenterContainer
@@ -45,6 +53,8 @@ func _ready() -> void:
 	Global.load()
 	_video_options_fullscreen_toggle_menu_button_pressed()
 	
+	demo_node.get_children().pick_random().visible = true
+	camera.visible = true
 	var has_previous_save:bool = Global.save_data.get("game", {}).get("started", false)
 	continue_menu_button.disabled = not has_previous_save
 	
@@ -54,11 +64,15 @@ func _ready() -> void:
 	options_menu_button.pressed.connect(_options_menu_button_pressed)
 	credits_button.pressed.connect(_credits_menu_button_pressed)
 	
+	how_to_play_menu_button.pressed.connect(_how_to_play_menu_button_pressed)
+	back_how_to_play_menu_button.pressed.connect(_back_options_menu_button_pressed)
+	
 	game_options_menu_button.pressed.connect(_game_options_menu_button_pressed)
 	audio_options_menu_button.pressed.connect(_audio_options_menu_button_pressed)
 	video_options_menu_button.pressed.connect(_video_options_menu_button_pressed)
 	back_options_menu_button.pressed.connect(_back_options_menu_button_pressed)
 	back_credits_menu_button.pressed.connect(_back_options_menu_button_pressed)
+	
 	
 	back_game_options_menu_button.pressed.connect(_options_menu_button_pressed)
 	back_audio_options_menu_button.pressed.connect(_options_menu_button_pressed)
@@ -81,12 +95,17 @@ func _hide_all_menus():
 	main_menu_container.visible = false
 	options_menu_container.visible = false
 	game_options_menu_container.visible = false
+	how_to_play_menu_container.visible = false
 	audio_options_menu_container.visible = false
 	video_options_menu_container.visible = false
 	credits_menu_container.visible = false
 	
 func _show_menu(menu_container:CenterContainer):
 	menu_container.visible = true
+
+func _how_to_play_menu_button_pressed() -> void:
+	_hide_all_menus()
+	_show_menu(how_to_play_menu_container)
 
 func _options_menu_button_pressed() -> void:
 	_hide_all_menus()

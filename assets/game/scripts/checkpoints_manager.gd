@@ -14,7 +14,9 @@ func _ready() -> void:
 	track = get_parent()
 	pod_racers_node = track.pod_racers_node
 	for pod_racer in pod_racers_node.get_children():
-		pod_racers.append(pod_racer as PodRacer)
+		var unlocked_characters:Array = Global.save_data.get("game", {}).get("unlocked_characters", [true,true,false,false,false,false,false,false])
+		if unlocked_characters[pod_racer.portrait_id] or pod_racer.portrait_id in Global.character_unlocks_per_track_win[Global.save_data.get("game",{}).get("track", 0)]:
+			pod_racers.append(pod_racer as PodRacer)
 	for checkpoint in self.get_children():
 		checkpoint.checkpoint_reached.connect(_checkpoint_reached)
 	total_checkpoints = self.get_child_count()

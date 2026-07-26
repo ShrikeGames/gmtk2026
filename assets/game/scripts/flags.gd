@@ -14,3 +14,4 @@ func _positions_changed():
 		var pod_racer:PodRacer = checkpoint_manager.pod_racers[i]
 		var flag_sprite:Sprite2D = self.get_child(i)
 		flag_sprite.texture = Global.flags[pod_racer.portrait_id]
+		flag_sprite.visible = true

@@ -9,7 +9,7 @@ class_name SpeedHUD
 @export var name_textbox:RichTextLabel
 @export var racer_portrait:Node3D
 @export var lap_counter_text:RichTextLabel
-
+@export var boost_ready:Sprite2D
 var initial_rotation:Vector3
 
 var pitch_right:float = 0
@@ -80,6 +80,10 @@ func _process(_delta: float) -> void:
 	boostmeter.value = clampf(0.0, pod_racer.current_boost, pod_racer.max_boost)
 	_update_textbox()
 	racer_portrait.rotation = initial_rotation + Vector3(deg_to_rad(pitch_back+pitch_forward), 0, deg_to_rad(pitch_left + pitch_right))
+	if pod_racer.current_boost >= pod_racer.max_boost:
+		boost_ready.visible = true
+	else:
+		boost_ready.visible = false
 	
 func _update_textbox():
 	textbox.text = "[color=green]%skm/h[/color]\n[color=yellow]%ss[/color]"%[int(abs(pod_racer.linear_velocity.length())), snappedf(boostmeter.value, 0.01)]

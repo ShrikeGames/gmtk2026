@@ -1679,4 +1679,5 @@ camera_attributes = SubResource("CameraAttributesPhysical_rmgjj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=424735549]
 stream = SubResource("AudioStreamWAV_f2t80")
+volume_db = -16.0
 bus = &"Voice"
