@@ -6,6 +6,26 @@ My Previous Game Jam Entries can be played on Itch: https://shrikegames.itch.io/
 
 Live Game Dev Stream Playlist: https://www.youtube.com/playlist?list=PLBG-l28SntFw
 
+Play the game here! https://itch.io/jam/gmtk-jam-2026/rate/4816941
+
+
+
+https://github.com/user-attachments/assets/2aa30bfe-fc2a-401d-a3db-f03c14115fbc
+
+
+
+https://github.com/user-attachments/assets/4883806a-8919-4621-adf4-08913f36c10c
+
+
+
+https://github.com/user-attachments/assets/84d0322e-df72-4816-938b-8734a7f0c9b3
+
+
+
+https://github.com/user-attachments/assets/87cf1b0f-abb4-49a2-94a2-4b1257925324
+
+
+
 ## The Theme is "COUNT DOWN"
 
 
