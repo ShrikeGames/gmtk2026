@@ -1,6 +1,6 @@
 extends Node
 
-var save_file_location: String = "user://save_data_v1.json"
+var save_file_location: String = "user://save_data_v2.json"
 var CHEVRON_LEFT:String = "{{"
 var CHEVRON_RIGHT:String = "}}"
 
