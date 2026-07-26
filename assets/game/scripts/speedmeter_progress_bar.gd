@@ -83,4 +83,4 @@ func _process(_delta: float) -> void:
 	
 func _update_textbox():
 	textbox.text = "[color=green]%skm/h[/color]\n[color=yellow]%ss[/color]"%[int(abs(pod_racer.linear_velocity.length())), snappedf(boostmeter.value, 0.01)]
-	lap_counter_text.text = "Lap %s\nCheckpoint %s"%[max(1, pod_racer.current_lap), max(0, pod_racer.current_checkpoint)+1]
+	lap_counter_text.text = "Lap %s/3\nCheckpoint %s"%[max(1, pod_racer.current_lap), max(0, pod_racer.current_checkpoint)+1]
